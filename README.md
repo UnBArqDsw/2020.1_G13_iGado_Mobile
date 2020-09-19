@@ -21,13 +21,55 @@ Descreva o seu projeto em linhas gerais.
 Adicione 3 ou mais screenshots do projeto em termos de interface e funcionamento.
 
 ## Instalação 
-**Linguagens**: xxxxxx<br>
+**Linguagens**: Flutter, framework baseado na linguagem Dart<br>
 **Tecnologias**: xxxxxx<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-Insira um manual ou um script para auxiliar ainda mais.
+
+### Instalando Flutter
+
+#### Linux
+
+##### Instalando Flutter usando o snapd
+
+Para instalar flutter usando o snapd, primeiramente você deve ter o snapd instalado no seu computador, para instalá-lo basta utilizar o comando  
+
+```
+sudo apt install snapd
+```
+
+Com snapd instalado agora podemos instalar o flutter sdk ou utilizando a Snap Store ou utilizando o seguinte comando:
+
+```
+sudo snap install flutter --classic
+```
+
+#### macOS
+
+Para instalar flutter em um sistema mac você deve entrar no site https://flutter.dev/docs/get-started/install/macos e baixar o arquivo zipado que ele cita no primeiro tópico.
+
+![Flutter Mac](https://user-images.githubusercontent.com/46005310/93666270-3fedcc80-fa53-11ea-96c8-a187c8771db8.png)
+
+Após baixado você deve extrair para a pasta onde você quer que seus arquivos do flutter sdk fiquem guardados utilizando oos comandos:
+
+```
+ cd ~/nome_da_pasta
+ unzip ~/Downloads/flutter_macos_1.20.4-stable.zip
+```
+
+### Configurando flutter 
+
+Após ter instalando você deve rodar o comando `flutter doctor` onde ele vai analisar e dizer quais configurações você deve fazer, você deve seguir o passo a passo indicado por este comando para conseguir rodar o flutter 100%.
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+
+### Rodando aplicativo localmente utilizando o VS Code
+
+Para você conseguir rodar o aplicativo localmente você pode utilizar o VS Code, ou outras ferramentas recomendadas na própria [Documentação do Flutter](https://flutter.dev/docs/development/tools/vs-code).
+
+Para utilizar o VS Code você deve instalar a extensão [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) onde ela vai adicionar no seu editor de texto várias opções que irão te auxiliar na execução de projetos flutter. 
+
+![Ícones Extensão Flutter](https://user-images.githubusercontent.com/46005310/93666426-809a1580-fa54-11ea-84ad-1bac30a27c80.png)
+
+E para rodar o aplicativo basta você conectar seu celular no computador, utilizando um cabo USB, e ativar a depuração USB do mesmo, ou utilizar um emulador de iOS, casa você esteja utilizando um macOS, ou de Android, caso você esteja utilizando qualquer sistema operacional. Após ter os dispositivos conectados basta apertar no botão *play* que está disponivel quando você abre o código main.dart no seu VS Code.
 
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto final.
