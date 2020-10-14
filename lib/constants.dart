@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'splash.dart';
-
-import 'login.dart';
-
-Map<String, WidgetBuilder> routes = {
-  '/': (context) => SplashScreen(),
-  '/login': (context) => LoginPage(),
-};
-
-Decoration backgroundTheme = BoxDecoration(
+// Colors
+Color kBrown1 = Color(0xFFC97946);
+Color kBrown2 = Color(0xFFAD7B56);
+Color kBege1 = Color(0xFFEFC19D);
+//Styles
+Decoration kBackgroundTheme = BoxDecoration(
   gradient: LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
       Color(0xFFFFFFFF),
-      Color(0xFFEFC19D),
+      kBege1,
     ],
   ),
 );
 
-InputDecoration inputFormStyle = InputDecoration(
+InputDecoration kInputFormStyle = InputDecoration(
   hintStyle: TextStyle(
     color: Color(0xFFAAAAAA),
   ),
@@ -33,5 +29,6 @@ InputDecoration inputFormStyle = InputDecoration(
   filled: true,
 );
 
-Color brown1 = Color(0xFFC97946);
-Color brown2 = Color(0xFFAD7B56);
+// images
+
+String kLogo = 'assets/images/logo.png';
