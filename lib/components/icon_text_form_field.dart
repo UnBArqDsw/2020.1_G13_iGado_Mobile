@@ -38,6 +38,9 @@ class IconTextFormField extends StatelessWidget {
             hintText: placeholder,
           ),
         ),
+        SizedBox(
+          height: 5.0,
+        ),
       ],
     );
   }

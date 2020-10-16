@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Form(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconTextFormField(
@@ -35,9 +36,6 @@ class _LoginPageState extends State<LoginPage> {
                       icon: Icons.mail_outline,
                       placeholder: "Digite seu e-mail",
                       obscureText: false,
-                    ),
-                    SizedBox(
-                      height: 5.0,
                     ),
                     IconTextFormField(
                       title: "Senha",
