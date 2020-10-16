@@ -1,0 +1,113 @@
+#!/bin/bash
+# paxmmit V3
+# Create message with proper reference to rep issue based on branch name ddd_issueName
+# Then add all changes in unstaged and commit with the respective message
+# Author: Rogério Júnior
+
+if [ ! -z "$1" -a "$1" != " " ]; then
+   bold=$(tput bold)
+   normal=$(tput sgr0)
+
+   declare number
+   number=$(git branch | grep '*' | sed 's/.*\([0-9]\{3\}\).*/\1/') 
+
+   if [ $number -eq $number 2> /dev/null ]; then
+      number=$number
+   else
+      echo -e "${bold}@@@@@@@@@@@@@@@@@@@@@@@@@@@ W A R N I N G @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@${normal}"  
+      echo -e "\nYou're out of a issue branch, the only way of contibuiting to iGado Org! :X "
+      echo -e "\nAre you ${bold}absolutely${normal} certain to try to commit in ${bold}$(git branch | grep '*' | sed 's|[*]||g')${normal} ? \n"
+
+      read -p "(${bold}y/n${normal}) " flag
+
+      if [ $flag == "n" ]; then
+         exit 1
+      fi
+
+      echo ""
+      read -p "What's the ${bold}issue number${normal}? " number
+      echo ""
+   fi
+
+   message="UnBArqDsw/2020.1_G13_Projeto#$number "
+
+   declare -a emoji_map
+   emoji_map[0]="‼️ BREAKING: "
+   emoji_map[1]="🐛 FIX: "
+   emoji_map[2]="👌 IMPROVE: "
+   emoji_map[3]="📖 DOC: "
+   emoji_map[4]="📦 NEW: "
+   emoji_map[5]="🤖 TEST: "
+
+   echo "What is the nature of this ${bold}commit${normal}? "
+   echo ""
+   read -p "(${bold}0${normal})-> ‼️ BREAKING //// (${bold}1${normal})-> 🐛 FIX ////(${bold}2${normal})-> 👌 IMPROVE ////(${bold}3${normal})-> 📖 DOC ////(${bold}4${normal})-> 📦 NEW  ////(${bold}5${normal})-> 🤖 TEST:   " emoji
+
+   message+="${emoji_map[${emoji}]} ${1}"
+
+
+   read -p "Are you ${bold}pairing${normal}? (${bold}y/n${normal}) " pairing
+   echo ""
+
+   if [ $pairing != "n" ]; then
+
+      declare -a map
+
+      # map=[["c"]="Co-authored-by: Caio Fernandes <caiovf13@gmail.com>" ["l"]="Co-authored-by: Lucas Fellipe <lucasfcm9@gmail.com>" ["g"]="Co-authored-by: Guilherme Mendes <guimendesp12@gmail.com>" ["j"]="Co-authored-by: João Guedes <isudjoao@gmail.com>" ["i"]="Co-authored-by: Iuri Severo <nobreiuri@gmail.com>"]]
+
+      map[0]="Co-authored-by: Caio Fernandes <caiovf13@gmail.com>"
+      map[1]="Co-authored-by: Lucas Fellipe <lucasfcm9@gmail.com>"
+      map[2]="Co-authored-by: Guilherme Mendes <guimendesp12@gmail.com>"
+      map[3]="Co-authored-by: João Guedes <isudjoao@gmail.com>"
+      map[4]="Co-authored-by: Iuri Severo <nobreiuri@gmail.com>"
+
+      declare flag="y"
+
+      message+="\n"
+
+      while [ $flag != 'n' ]; do
+         echo -e "With who?\n"x
+         read -p "(${bold}0${normal})Caio/(${bold}1${normal})Luquita/(${bold}2${normal})Guilherme/(${bold}3${normal})Johnson/(${bold}4${normal})Iuri " pairing_name
+         echo ""
+         echo ${pairing_name}
+
+         message+="\n${map[${pairing_name}]}"
+
+         read -p "Anyone else? (${bold}y/n${normal}) " flag
+         echo ""
+      done
+
+   fi
+
+   echo -e "That's the correct message ?\n\n\n$message\n\n"
+   read -p "(${bold}y/n${normal}): " flag
+
+   if [ $flag != 'n' ]; then
+      echo ""
+
+      read -p "What do you want do stage? (${bold}e${normal})verything/(${bold}s${normal})omethings/(${bold}n${normal})othing " flag
+
+      echo ""
+
+      if [ $flag == 'e' ]; then
+         git add .
+      else 
+         if [ $flag == 's' ]; then
+            echo -e "Let's ${bold}stage${normal} the changes!\n\n"
+            git add -i
+
+            echo ""
+         fi
+      fi
+
+      git commit -m"$(echo -e $message)"
+      echo -e "\n\n"
+      echo -e "${bold}Everything commited!! ;)"
+   else
+      echo -e "\n\n"
+      echo "${bold}Run me again! :("
+   fi
+else
+   echo -e "Wheres the message?! Run me again"
+fi
+
