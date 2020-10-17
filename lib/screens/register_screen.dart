@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/constants.dart';
+import 'package:igado_front/services/user_service.dart';
 
 enum UserRole { owner, employee }
+UserService userService = new UserService();
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -13,7 +15,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   UserRole role = UserRole.employee;
   bool formOwner = false;
   bool formEmplooye = true;
-
+  Map<String, dynamic> data;
+  var response;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -143,9 +146,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         visible: formEmplooye,
                       ),
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            data = {
+                              "email": "johnson@johnson",
+                              "fullname": "johnson",
+                              "password": "147123",
+                              "isproprietary": "true"
+                            };
+                            response = userService.createUser(data);
+                          });
+                        },
                         child: Text(
-                          'Entrar',
+                          'Cadastrar',
                           style: TextStyle(
                             color: Colors.white,
                           ),
