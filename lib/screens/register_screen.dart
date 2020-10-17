@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/components/icon_text_form_field.dart';
+import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/user_service.dart';
 
-enum UserRole { owner, employee }
 UserService userService = new UserService();
 
 class RegisterScreen extends StatefulWidget {
@@ -16,7 +16,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool formOwner = false;
   bool formEmplooye = true;
   Map<String, dynamic> data;
+  String fullName;
+  String email;
+  String emailConfirm;
+  String password;
+  String passwordConfirm;
+  var date;
   var response;
+  Map<String, dynamic> formResponse = {
+    "fullName": "",
+    "email": "",
+    "emailConfirm": "",
+    "date": "",
+    "password": "",
+    "passwordConfirm": "",
+    "farmName": "",
+    "farmCode": ""
+  };
+
+  Function changeDictData(String field) {
+    return (text) {
+      setState(() {
+        formResponse[field] = text;
+      });
+    };
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -50,36 +75,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         icon: Icons.person_outline,
                         placeholder: "Digite seu nome",
                         obscureText: false,
+                        onChange: changeDictData('fullName'),
                       ),
                       IconTextFormField(
                         title: "Data de Nascimento",
                         icon: Icons.calendar_today,
                         placeholder: "Digite sua data de nascimento",
                         obscureText: false,
+                        onChange: changeDictData('date'),
                       ),
                       IconTextFormField(
                         title: "E-mail",
                         icon: Icons.mail_outline,
                         placeholder: "Digite seu e-mail",
                         obscureText: false,
+                        onChange: changeDictData('email'),
                       ),
                       IconTextFormField(
                         title: "Confirme seu e-mail",
                         icon: Icons.mail_outline,
                         placeholder: "Confirme seu e-mail",
                         obscureText: false,
+                        onChange: changeDictData('emailConfirm'),
                       ),
                       IconTextFormField(
                         title: "Senha",
                         icon: Icons.lock_outline,
                         placeholder: "Digite sua senha",
                         obscureText: true,
+                        onChange: changeDictData('password'),
                       ),
                       IconTextFormField(
                         title: "Confirme sua Senha",
                         icon: Icons.lock_outline,
                         placeholder: "Confirme sua senha",
                         obscureText: true,
+                        onChange: changeDictData('passwordConfirm'),
                       ),
                       Text(
                         "Função na fazenda",
@@ -127,32 +158,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      Visibility(
-                        child: IconTextFormField(
-                          title: "Nome da sua fazenda",
-                          icon: Icons.add_circle,
-                          placeholder: "Nome da fazenda",
-                          obscureText: false,
-                        ),
-                        visible: formOwner,
+                      VisibilityFormField(
+                        isVisible: formOwner,
+                        title: "Nome da sua fazenda",
+                        placeholder: "Nome da fazenda",
+                        onChange: changeDictData('farmName'),
                       ),
-                      Visibility(
-                        child: IconTextFormField(
-                          title: "Código identificador da fazenda",
-                          icon: Icons.add_circle,
-                          placeholder: "Código da fazenda",
-                          obscureText: false,
-                        ),
-                        visible: formEmplooye,
+                      VisibilityFormField(
+                        isVisible: formEmplooye,
+                        title: "Código identificador da fazenda",
+                        placeholder: "Código da fazenda",
+                        onChange: changeDictData('farmCode'),
                       ),
                       FlatButton(
                         onPressed: () {
+                          print(formResponse);
                           setState(() {
                             data = {
-                              "email": "johnson@johnson",
-                              "fullname": "johnson",
-                              "password": "147123",
-                              "isproprietary": "true"
+                              "email": formResponse["email"],
+                              "fullname": formResponse["fullName"],
+                              "password": formResponse["password"],
+                              "isproprietary":
+                                  role == UserRole.employee ? true : false,
                             };
                             response = userService.createUser(data);
                           });
