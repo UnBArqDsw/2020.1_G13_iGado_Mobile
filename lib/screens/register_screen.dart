@@ -3,6 +3,7 @@ import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/user_service.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 UserService userService = new UserService();
 
@@ -21,6 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String emailConfirm;
   String password;
   String passwordConfirm;
+  bool areFormOk = false;
   var date;
   var response;
   Map<String, dynamic> formResponse = {
@@ -33,6 +35,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "farmName": "",
     "farmCode": ""
   };
+
+  bool checkIfFormResponse(formResponse) {
+    if (formResponse["fullName"].isEmpty ||
+        formResponse["email"].isEmpty ||
+        formResponse["emailConfirm"].isEmpty ||
+        formResponse["date"].isEmpty ||
+        formResponse["password"].isEmpty ||
+        formResponse["passwordConfirm"].isEmpty ||
+        (formResponse["farmName"].isEmpty &&
+            formResponse["farmCode"].isEmpty)) {
+      return false;
+    }
+    if (!checkFieldsAreEquals("password")) return false;
+    if (!checkFieldsAreEquals("email")) return false;
+    return true;
+  }
+
+  bool checkFieldsAreEquals(String field) {
+    if (formResponse[field] == formResponse["$field" "Confirm"]) return true;
+    return false;
+  }
 
   Function changeDictData(String field) {
     return (text) {
@@ -171,19 +194,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onChange: changeDictData('farmCode'),
                       ),
                       FlatButton(
-                        onPressed: () {
-                          print(formResponse);
-                          setState(() {
-                            data = {
-                              "email": formResponse["email"],
-                              "fullname": formResponse["fullName"],
-                              "password": formResponse["password"],
-                              "isproprietary":
-                                  role == UserRole.employee ? true : false,
-                            };
-                            response = userService.createUser(data);
-                          });
-                        },
+                        onPressed: checkIfFormResponse(formResponse)
+                            ? () {
+                                setState(() {
+                                  data = {
+                                    "email": formResponse["email"],
+                                    "fullname": formResponse["fullName"],
+                                    "password": formResponse["password"],
+                                    "isproprietary": role == UserRole.employee
+                                        ? true
+                                        : false,
+                                  };
+                                  response = userService.createUser(data);
+                                });
+                              }
+                            : null,
                         child: Text(
                           'Cadastrar',
                           style: TextStyle(
@@ -191,6 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         color: kBrown2,
+                        disabledColor: kDisabledButtonColor,
                       ),
                     ],
                   ),
