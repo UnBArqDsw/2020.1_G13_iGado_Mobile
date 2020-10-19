@@ -17,4 +17,46 @@ class UserService {
     } else
       throw Exception('Failed to create user. Error $statusCode');
   }
+
+  Future<User> fetchUser(int id) async {
+    final response =
+        await http.get('http://10.0.0.103:5001/user/${id.toString()}');
+    print(response);
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load user');
+    }
+  }
+}
+
+class User {
+  final int userId;
+  final String email;
+  final String fullname;
+  final String password;
+  final bool isProprietary;
+  final List<dynamic> farms;
+
+  User(
+      {this.userId,
+      this.email,
+      this.fullname,
+      this.password,
+      this.isProprietary,
+      this.farms});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        userId: json['data']['user_id'],
+        email: json['data']['email'],
+        fullname: json['data']['fullname'],
+        password: json['data']['password'],
+        isProprietary: json['data']['is_proprietary'],
+        farms: json['data']['farms']);
+  }
 }
