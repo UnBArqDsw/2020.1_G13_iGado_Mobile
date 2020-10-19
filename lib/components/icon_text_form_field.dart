@@ -6,11 +6,13 @@ class IconTextFormField extends StatelessWidget {
   final String placeholder;
   final IconData icon;
   final bool obscureText;
+  final Function onChange;
   IconTextFormField(
       {@required this.title,
       @required this.placeholder,
       @required this.icon,
-      @required this.obscureText});
+      @required this.obscureText,
+      @required this.onChange});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,6 +39,10 @@ class IconTextFormField extends StatelessWidget {
           decoration: kInputFormStyle.copyWith(
             hintText: placeholder,
           ),
+          onChanged: onChange,
+        ),
+        SizedBox(
+          height: 5.0,
         ),
       ],
     );
