@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               decoration: kBackgroundTheme,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                    horizontal: 20.0, vertical: 10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,8 +60,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 10.0,
                           ),
-                          Text(userInfo.fullname,
-                              style: TextStyle(color: kBrown1, fontSize: 25.0)),
+                          Text(
+                            userInfo.fullname,
+                            style: TextStyle(
+                              color: kBrown1,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                           Text(
                               userInfo.isProprietary
                                   ? 'Proprietário da fazenda ${userInfo.farms[0].toString()}'
@@ -74,7 +80,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           Center(
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                print(userInfo.isProprietary);
+                              },
                               child: Text(
                                 'Sair da Conta',
                                 style: TextStyle(
