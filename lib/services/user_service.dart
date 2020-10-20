@@ -1,9 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserService {
   Future<dynamic> createUser(Map data) async {
-    var url = 'http://10.0.2.2:5001/user/create';
+    var url = DotEnv().env['HOST_URL'] + 'user/create';
     var response = await http.post(
       url,
       headers: <String, String>{
@@ -19,7 +20,7 @@ class UserService {
 
   Future<User> fetchUser(int id) async {
     final response =
-        await http.get('http://10.0.0.103:5001/user/${id.toString()}');
+        await http.get(DotEnv().env['HOST_URL'] + 'user/${id.toString()}');
     print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
