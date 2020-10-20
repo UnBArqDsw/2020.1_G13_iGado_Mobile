@@ -20,7 +20,7 @@ class UserService {
 
   Future<User> fetchUser(int id) async {
     final response =
-        await http.get('http://10.0.0.103:5001/user/${id.toString()}');
+        await http.get('http://10.0.2.2:5001/user/${id.toString()}');
     print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

@@ -19,14 +19,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Map<String, dynamic> data;
   var response;
 
-  List<IconData> icons = [
-    Icons.person_outline,
-    Icons.calendar_today,
-    Icons.mail_outline,
-    Icons.mail_outline,
-    Icons.lock_outline,
-    Icons.lock_outline,
-  ];
   Map<String, dynamic> formResponse = {
     "fullName": "",
     "email": "",
@@ -35,7 +27,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "password": "",
     "passwordConfirm": "",
     "farmName": "",
-    "farmCode": ""
+    "farmCode": "",
+    "farmSize": "",
   };
 
   bool checkFormResponse(formResponse) {
@@ -190,6 +183,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onChange: changeDictData('farmName'),
                       ),
                       VisibilityFormField(
+                        isVisible: isOwner,
+                        title: "Tamanho da sua fazenda",
+                        placeholder: "Tamanho da fazenda",
+                        onChange: changeDictData('farmSize'),
+                      ),
+                      VisibilityFormField(
                         isVisible: isEmplooye,
                         title: "Código identificador da fazenda",
                         placeholder: "Código da fazenda",
@@ -203,8 +202,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     "email": formResponse["email"],
                                     "fullname": formResponse["fullName"],
                                     "password": formResponse["password"],
-                                    "isproprietary": role == UserRole.employee
+                                    "is_proprietary": role == UserRole.employee
                                         ? true
+                                        : false,
+                                    "farm_id": isEmplooye
+                                        ? formResponse["farmCode"]
+                                        : false,
+                                    "farm_name": isOwner
+                                        ? formResponse["farmName"]
+                                        : false,
+                                    "farm_size": isOwner
+                                        ? formResponse["farmSize"]
                                         : false,
                                   };
                                   response = userService
