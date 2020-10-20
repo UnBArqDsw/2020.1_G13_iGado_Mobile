@@ -1,7 +1,9 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
 
-void main() {
+Future main() async {
+  await DotEnv().load('.env');
   runApp(MyApp());
 }
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFAD7B56),
       ),
       routes: kRoutes,
-      initialRoute: '/profile',
+      initialRoute: '/login',
     );
   }
 }
