@@ -11,15 +11,16 @@ class UserService {
       },
       body: jsonEncode(data),
     );
-    if (response.statusCode == 201) {
+    int statusCode = response.statusCode;
+    if (statusCode == 201) {
       return jsonDecode(response.body);
     } else
-      throw Exception('Failed to create user');
+      throw Exception('Failed to create user. Error $statusCode');
   }
 
   Future<User> fetchUser(int id) async {
     final response =
-        await http.get('http://10.0.0.103:5001/user/${id.toString()}');
+        await http.get('http://10.0.2.2:5001/user/${id.toString()}');
     print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
