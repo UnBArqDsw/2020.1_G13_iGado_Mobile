@@ -31,6 +31,15 @@ InputDecoration kInputFormStyle = InputDecoration(
   filled: true,
 );
 
+// Texts and icons
+// List<IconData> icons = [
+//   Icons.person_outline,
+//   Icons.calendar_today,
+//   Icons.mail_outline,
+//   Icons.mail_outline,
+//   Icons.lock_outline,
+//   Icons.lock_outline,
+// ];
 // images
 
 String kLogo = 'assets/images/logo.png';

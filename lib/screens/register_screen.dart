@@ -3,7 +3,7 @@ import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/user_service.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:igado_front/utils/alert_utils.dart';
 
 UserService userService = new UserService();
 
@@ -14,17 +14,11 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   UserRole role = UserRole.employee;
-  bool formOwner = false;
-  bool formEmplooye = true;
+  bool isOwner = false;
+  bool isEmplooye = true;
   Map<String, dynamic> data;
-  String fullName;
-  String email;
-  String emailConfirm;
-  String password;
-  String passwordConfirm;
-  bool areFormOk = false;
-  var date;
   var response;
+
   Map<String, dynamic> formResponse = {
     "fullName": "",
     "email": "",
@@ -33,10 +27,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "password": "",
     "passwordConfirm": "",
     "farmName": "",
-    "farmCode": ""
+    "farmCode": "",
+    "farmSize": "",
   };
 
-  bool checkIfFormResponse(formResponse) {
+  bool checkFormResponse(formResponse) {
     if (formResponse["fullName"].isEmpty ||
         formResponse["email"].isEmpty ||
         formResponse["emailConfirm"].isEmpty ||
@@ -154,8 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onChanged: (UserRole value) {
                               setState(() {
                                 role = value;
-                                formEmplooye = false;
-                                formOwner = true;
+                                isEmplooye = false;
+                                isOwner = true;
                               });
                             },
                           ),
@@ -174,38 +169,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onChanged: (UserRole value) {
                               setState(() {
                                 role = value;
-                                formEmplooye = true;
-                                formOwner = false;
+                                isEmplooye = true;
+                                isOwner = false;
                               });
                             },
                           ),
                         ),
                       ),
                       VisibilityFormField(
-                        isVisible: formOwner,
+                        isVisible: isOwner,
                         title: "Nome da sua fazenda",
                         placeholder: "Nome da fazenda",
                         onChange: changeDictData('farmName'),
                       ),
                       VisibilityFormField(
-                        isVisible: formEmplooye,
+                        isVisible: isOwner,
+                        title: "Tamanho da sua fazenda",
+                        placeholder: "Tamanho da fazenda",
+                        onChange: changeDictData('farmSize'),
+                      ),
+                      VisibilityFormField(
+                        isVisible: isEmplooye,
                         title: "Código identificador da fazenda",
                         placeholder: "Código da fazenda",
                         onChange: changeDictData('farmCode'),
                       ),
                       FlatButton(
-                        onPressed: checkIfFormResponse(formResponse)
+                        onPressed: checkFormResponse(formResponse)
                             ? () {
                                 setState(() {
                                   data = {
                                     "email": formResponse["email"],
                                     "fullname": formResponse["fullName"],
                                     "password": formResponse["password"],
-                                    "isproprietary": role == UserRole.employee
+                                    "is_proprietary": role == UserRole.employee
                                         ? true
                                         : false,
+                                    "farm_id": isEmplooye
+                                        ? formResponse["farmCode"]
+                                        : false,
+                                    "farm_name": isOwner
+                                        ? formResponse["farmName"]
+                                        : false,
+                                    "farm_size": isOwner
+                                        ? formResponse["farmSize"]
+                                        : false,
                                   };
-                                  response = userService.createUser(data);
+                                  response = userService
+                                      .createUser(data)
+                                      .then((value) => showAlert(
+                                            "Usuário cadastrado com sucesso.",
+                                            context,
+                                          ))
+                                      .catchError((e) {
+                                    print(e);
+                                    showAlert(
+                                      "Opa, não foi possível criar seu usuário, verifique seus dados ou tente novamente mais tarde.",
+                                      context,
+                                    );
+                                  });
                                 });
                               }
                             : null,

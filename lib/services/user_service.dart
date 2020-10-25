@@ -12,10 +12,11 @@ class UserService {
       },
       body: jsonEncode(data),
     );
-    if (response.statusCode == 201) {
+    int statusCode = response.statusCode;
+    if (statusCode == 201) {
       return jsonDecode(response.body);
     } else
-      throw Exception('Failed to create user');
+      throw Exception('Failed to create user. Error $statusCode');
   }
 
   Future<User> fetchUser(int id) async {
