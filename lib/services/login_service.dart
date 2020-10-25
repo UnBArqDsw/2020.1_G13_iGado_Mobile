@@ -1,10 +1,12 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:igado_front/services/api.dart';
+
 class LoginService {
+  final API _api = API();
   Future<String> login(Map data) async {
-    var url = DotEnv().env['HOST_URL'] + 'user/login';
+    var url = _api.url + 'user/login';
     var response = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -12,8 +14,10 @@ class LoginService {
         body: jsonEncode(data));
     if (response.statusCode == 200) {
       return 'ok';
-    } else
+    } else {
+      print(response.body);
       throw Exception('Invalid Credentials');
+    }
   }
 }
 

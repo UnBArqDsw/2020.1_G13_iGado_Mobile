@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFAD7B56),
       ),
       routes: kRoutes,
-      initialRoute: '/login',
+      initialRoute: '/register',
     );
   }
 }
