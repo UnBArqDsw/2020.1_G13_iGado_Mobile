@@ -1,10 +1,11 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:igado_front/services/api.dart';
 
 class UserService {
+  final API _api = API();
   Future<dynamic> createUser(Map data) async {
-    var url = DotEnv().env['HOST_URL'] + 'user/create';
+    var url = _api.url + 'user/create';
     var response = await http.post(
       url,
       headers: <String, String>{
@@ -20,8 +21,7 @@ class UserService {
   }
 
   Future<User> fetchUser(int id) async {
-    final response =
-        await http.get(DotEnv().env['HOST_URL'] + 'user/${id.toString()}');
+    final response = await http.get(_api.url + 'user/${id.toString()}');
     print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
