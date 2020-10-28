@@ -34,83 +34,71 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: kBackgroundTheme,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(40.0),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage('assets/images/logo.png'),
-                height: 200.0,
-              ),
-              Form(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconTextFormField(
-                      title: "E-mail",
-                      icon: Icons.mail_outline,
-                      placeholder: "Digite seu e-mail",
-                      obscureText: false,
-                      onChange: changeDictData('email'),
-                    ),
-                    IconTextFormField(
-                      title: "Senha",
-                      icon: Icons.lock_outline,
-                      placeholder: "Digite sua senha",
-                      obscureText: true,
-                      onChange: changeDictData('password'),
-                    ),
-                    FlatButton(
-                      onPressed: checkIfFormResponse(formResponse)
-                          ? () {
-                              setState(() {
-                                data = {
-                                  "email": formResponse['email'],
-                                  "password": formResponse['password'],
-                                };
-                                response = loginService.login(data);
-                                response
-                                    .then((value) => {
-                                          Navigator.pushNamed(
-                                              context, '/profile')
-                                        })
-                                    .catchError(() => {print('deu ruim')});
-                                print('kk');
-                              });
-                            }
-                          : null,
-                      child: Text(
-                        'Entrar',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      color: kBrown2,
-                    ),
-                  ],
-                ),
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Text(
-                  'Ou cadastre-se aqui',
-                  style: TextStyle(
-                    color: kBrown1,
-                  ),
-                ),
-              ),
-            ],
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(40.0),
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage('assets/images/logo.png'),
+            height: 200.0,
           ),
-        ),
+          Form(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconTextFormField(
+                  title: "E-mail",
+                  icon: Icons.mail_outline,
+                  placeholder: "Digite seu e-mail",
+                  obscureText: false,
+                  onChange: changeDictData('email'),
+                ),
+                IconTextFormField(
+                  title: "Senha",
+                  icon: Icons.lock_outline,
+                  placeholder: "Digite sua senha",
+                  obscureText: true,
+                  onChange: changeDictData('password'),
+                ),
+                FlatButton(
+                  onPressed: checkIfFormResponse(formResponse)
+                      ? () {
+                          setState(() {
+                            data = {
+                              "email": formResponse['email'],
+                              "password": formResponse['password'],
+                            };
+                            response = loginService.login(data);
+                            response
+                                .then((value) =>
+                                    {Navigator.pushNamed(context, '/profile')})
+                                .catchError(() => {print('deu ruim')});
+                            print('kk');
+                          });
+                        }
+                      : null,
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: kBrown2,
+                ),
+              ],
+            ),
+          ),
+          FlatButton(
+            onPressed: () {},
+            child: Text(
+              'Ou cadastre-se aqui',
+              style: TextStyle(
+                color: kBrown1,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
