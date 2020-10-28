@@ -32,13 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Perfil',
-                  style: TextStyle(
-                      color: kBrown2,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold),
-                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 35, 10, 10),
                   child: Column(

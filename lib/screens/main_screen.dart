@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/screens/login_screen.dart';
 import 'package:igado_front/screens/profile_screen.dart';
-import 'package:igado_front/screens/register_screen.dart';
+import 'package:igado_front/screens/splash_screen.dart';
+import 'package:igado_front/utils/destination.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -11,10 +12,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
+  Destination destination;
   final tabs = [
+    SplashScreen(),
+    SplashScreen(),
+    SplashScreen(),
+    SplashScreen(),
     ProfileScreen(),
-    RegisterScreen(),
-    LoginPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: kBrown2,
         automaticallyImplyLeading: false,
+        title: Text(allDestinations[_currentIndex].title),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: kBrown2,
@@ -31,20 +36,12 @@ class _MainScreenState extends State<MainScreen> {
         ),
         selectedItemColor: kBege1,
         currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Início'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            title: Text('Relatório'),
-          ),
-        ],
+        items: allDestinations.map((Destination destination) {
+          return BottomNavigationBarItem(
+            icon: Icon(destination.icon),
+            title: Text(destination.title),
+          );
+        }).toList(),
         onTap: (index) {
           setState(() {
             _currentIndex = index;
