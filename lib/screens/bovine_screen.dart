@@ -40,7 +40,7 @@ class _BovineScreenState extends State<BovineScreen> {
         formResponse["dateLastWeight"].isEmpty ||
         formResponse["dateOfBirth"].isEmpty ||
         (formResponse["geneticalEnhancement"].isEmpty &&
-            formResponse["isPregnant"].isEmpty)) {
+            formResponse["isPregnant"] == false)) {
       return false;
     }
     return true;
@@ -209,24 +209,26 @@ class _BovineScreenState extends State<BovineScreen> {
                             ? () {
                                 setState(() {
                                   data = {
+                                    "farm_id": 1,
                                     "name": formResponse["name"],
                                     "breed": formResponse["breed"],
-                                    "dateActualWeight":
+                                    "date_actual_weight":
                                         formResponse["dateActualWeight"],
-                                    "lastWeight": formResponse["lastWeight"],
-                                    "actualWeight":
+                                    "last_weight": formResponse["lastWeight"],
+                                    "actual_weight":
                                         formResponse["actualWeight"],
-                                    "dateLastWeight":
+                                    "date_last_weight":
                                         formResponse["dateLastWeight"],
-                                    "dateOfBirth": formResponse["dateOfBirth"],
-                                    "isBeefCattle":
+                                    "date_of_birth":
+                                        formResponse["dateOfBirth"],
+                                    "is_beef_cattle":
                                         role == BovineRole.beefCattle
                                             ? true
                                             : false,
-                                    "geneticalEnhancement": isBeefCattle
+                                    "genetical_enhancement": isBeefCattle
                                         ? formResponse["geneticalEnhancement"]
                                         : false,
-                                    "isPregnant": isDairyCattle
+                                    "is_pregnant": isDairyCattle
                                         ? formResponse["isPregnant"]
                                         : false,
                                   };

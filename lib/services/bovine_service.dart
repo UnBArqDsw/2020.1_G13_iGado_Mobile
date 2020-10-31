@@ -66,17 +66,17 @@ class Bovine {
 
   factory Bovine.fromJson(Map<String, dynamic> json) {
     return Bovine(
-        bovineId: json['data']['bovineId'],
+        bovineId: json['data']['bovine_id'],
         name: json['data']['name'],
         breed: json['data']['breed'],
-        dateActualWeight: json['data']['dateActualWeight'],
-        lastWeight: json['data']['lastWeight'],
-        actualWeight: json['data']['actualWeight'],
-        dateLastWeight: json['data']['dateLastWeight'],
-        dateOfBirth: json['data']['dateOfBirth'],
-        isBeefCattle: json['data']['isBeefCattle'],
-        geneticalEnhancement: json['data']['geneticalEnhancement'],
-        isPregnant: json['data']['isPregnant'],
-        farmId: json['data']['farmId']);
+        dateActualWeight: json['data']['date_actual_weight'],
+        lastWeight: json['data']['last_weight'],
+        actualWeight: json['data']['actual_weight'],
+        dateLastWeight: json['data']['date_last_weight'],
+        dateOfBirth: json['data']['date_of_birth'],
+        isBeefCattle: json['data']['is_beef_cattle'],
+        geneticalEnhancement: json['data']['genetical_enhancement'],
+        isPregnant: json['data']['is_pregnant'],
+        farmId: json['data']['farm_id']);
   }
 }
