@@ -41,9 +41,6 @@ class Bovine {
   final String name;
   final String breed;
   final Double actualWeight;
-  final DateTime dateActualWeight;
-  final Double lastWeight;
-  final DateTime dateLastWeight;
   final DateTime dateOfBirth;
   final bool isBeefCattle;
   final String geneticalEnhancement;
@@ -54,10 +51,7 @@ class Bovine {
       {this.bovineId,
       this.name,
       this.breed,
-      this.dateActualWeight,
-      this.lastWeight,
       this.actualWeight,
-      this.dateLastWeight,
       this.dateOfBirth,
       this.isBeefCattle,
       this.geneticalEnhancement,
@@ -69,10 +63,7 @@ class Bovine {
         bovineId: json['data']['bovine_id'],
         name: json['data']['name'],
         breed: json['data']['breed'],
-        dateActualWeight: json['data']['date_actual_weight'],
-        lastWeight: json['data']['last_weight'],
         actualWeight: json['data']['actual_weight'],
-        dateLastWeight: json['data']['date_last_weight'],
         dateOfBirth: json['data']['date_of_birth'],
         isBeefCattle: json['data']['is_beef_cattle'],
         geneticalEnhancement: json['data']['genetical_enhancement'],

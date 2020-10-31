@@ -4,6 +4,7 @@ import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/bovine_service.dart';
 import 'package:igado_front/utils/alert_utils.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 BovineService bovineService = new BovineService();
 
@@ -22,10 +23,7 @@ class _BovineScreenState extends State<BovineScreen> {
   Map<String, dynamic> formResponse = {
     "name": "",
     "breed": "",
-    "dateActualWeight": "",
-    "lastWeight": "",
     "actualWeight": "",
-    "dateLastWeight": "",
     "dateOfBirth": "",
     "geneticalEnhancement": "",
     "isPregnant": false,
@@ -34,13 +32,8 @@ class _BovineScreenState extends State<BovineScreen> {
   bool checkFormResponse(formResponse) {
     if (formResponse["name"].isEmpty ||
         formResponse["breed"].isEmpty ||
-        formResponse["dateActualWeight"].isEmpty ||
-        formResponse["lastWeight"].isEmpty ||
         formResponse["actualWeight"].isEmpty ||
-        formResponse["dateLastWeight"].isEmpty ||
-        formResponse["dateOfBirth"].isEmpty ||
-        (formResponse["geneticalEnhancement"].isEmpty &&
-            formResponse["isPregnant"] == false)) {
+        (formResponse["geneticalEnhancement"].isEmpty && isBeefCattle)) {
       return false;
     }
     return true;
@@ -84,52 +77,31 @@ class _BovineScreenState extends State<BovineScreen> {
                     children: [
                       IconTextFormField(
                         title: "Nome",
-                        icon: Icons.agriculture_outlined,
+                        icon: MaterialCommunityIcons.cow,
                         placeholder: "Digite o nome do bovino",
                         obscureText: false,
                         onChange: changeDictData('name'),
                       ),
                       IconTextFormField(
                         title: "Raça",
-                        icon: Icons.info,
+                        icon: Icons.pets,
                         placeholder: "Digite a raça do bovino",
                         obscureText: false,
                         onChange: changeDictData('breed'),
                       ),
                       IconTextFormField(
                         title: "Data de nascimento",
-                        icon: Icons.calendar_today,
+                        icon: FontAwesome.calendar,
                         placeholder: "Digite a data de nascimento",
                         obscureText: false,
                         onChange: changeDictData('dateOfBirth'),
                       ),
                       IconTextFormField(
                         title: "Peso atual",
-                        icon: Icons.line_weight,
+                        icon: MaterialCommunityIcons.weight,
                         placeholder: "Digite o peso atual do bovino",
                         obscureText: false,
                         onChange: changeDictData('actualWeight'),
-                      ),
-                      IconTextFormField(
-                        title: "Data da pesagem atual",
-                        icon: Icons.calendar_today,
-                        placeholder: "Digite a data da pesagem atual",
-                        obscureText: false,
-                        onChange: changeDictData('dateActualWeight'),
-                      ),
-                      IconTextFormField(
-                        title: "Peso antigo",
-                        icon: Icons.line_weight,
-                        placeholder: "Digite a data da pesagem antiga",
-                        obscureText: false,
-                        onChange: changeDictData('lastWeight'),
-                      ),
-                      IconTextFormField(
-                        title: "Data da pesagem antiga",
-                        icon: Icons.calendar_today,
-                        placeholder: "Digite a data da pesagem antiga",
-                        obscureText: false,
-                        onChange: changeDictData('dateLastWeight'),
                       ),
                       Text(
                         "Tipo de gado",
@@ -189,7 +161,8 @@ class _BovineScreenState extends State<BovineScreen> {
                             Switch(
                               onChanged: (value) {
                                 setState(() {
-                                  formResponse["isPregnant"] = value;
+                                  print(formResponse["isPregnant"].runtimeType);
+                                  formResponse["isPregnant"] = !!value;
                                 });
                               },
                               value: formResponse["isPregnant"],
@@ -212,13 +185,8 @@ class _BovineScreenState extends State<BovineScreen> {
                                     "farm_id": 1,
                                     "name": formResponse["name"],
                                     "breed": formResponse["breed"],
-                                    "date_actual_weight":
-                                        formResponse["dateActualWeight"],
-                                    "last_weight": formResponse["lastWeight"],
                                     "actual_weight":
                                         formResponse["actualWeight"],
-                                    "date_last_weight":
-                                        formResponse["dateLastWeight"],
                                     "date_of_birth":
                                         formResponse["dateOfBirth"],
                                     "is_beef_cattle":
