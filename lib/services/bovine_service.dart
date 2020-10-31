@@ -40,8 +40,8 @@ class Bovine {
   final int bovineId;
   final String name;
   final String breed;
-  final Double actualWeight;
-  final DateTime dateOfBirth;
+  final double actualWeight;
+  final String dateOfBirth;
   final bool isBeefCattle;
   final String geneticalEnhancement;
   final bool isPregnant;
