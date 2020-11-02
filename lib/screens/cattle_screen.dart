@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
+import 'package:igado_front/services/bovine_service.dart';
 
 class CattleScreen extends StatefulWidget {
   @override
@@ -7,6 +8,18 @@ class CattleScreen extends StatefulWidget {
 }
 
 class _CattleScreenState extends State<CattleScreen> {
+  var bovineList;
+  @override
+  void initState() {
+    super.initState();
+    getBovinesData();
+  }
+
+  void getBovinesData() async {
+    bovineList = await BovineService().getAllBovine();
+    print(bovineList);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
