@@ -17,12 +17,16 @@ class _CattleScreenState extends State<CattleScreen> {
   }
 
   void getBovinesData() async {
-    bovines = await BovineService().getAllBovine();
-    print(bovines[0].name);
+    var response = await BovineService().getAllBovine();
+    setState(() {
+      bovines = response;
+    });
+    print(bovines);
   }
 
   @override
   Widget build(BuildContext context) {
+    print(bovines);
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -35,7 +39,11 @@ class _CattleScreenState extends State<CattleScreen> {
               scrollDirection: Axis.horizontal,
               children: bovines.map((dynamic bovine) {
                 return SimpleCard(
-                  bovine: bovine,
+                  imageUrl:
+                      'https://image.freepik.com/fotos-gratis/vacas-em-pe-no-campo-verde-na-frente-da-montanha-fuji-japao_335224-197.jpg',
+                  title: bovine.name,
+                  subtitle:
+                      bovine.isBeefCattle ? "Gado de corte" : "Gado de Leite",
                 );
               }).toList(),
             ),

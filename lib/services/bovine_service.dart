@@ -42,7 +42,6 @@ class BovineService {
       var decodedBody = jsonDecode(response.body);
       print(decodedBody['beef_cattles'].length);
       for (var bovine in decodedBody['beef_cattles']) {
-        // print(bovine);
         bovines.add(Bovine.fromJson({"data": bovine}));
       }
       for (var bovine in decodedBody['dairy_cattles']) {

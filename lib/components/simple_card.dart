@@ -3,8 +3,10 @@ import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
 class SimpleCard extends StatelessWidget {
-  final Bovine bovine;
-  SimpleCard({this.bovine});
+  final String title;
+  final String subtitle;
+  final String imageUrl;
+  SimpleCard({this.title, this.subtitle, this.imageUrl});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,13 +15,12 @@ class SimpleCard extends StatelessWidget {
         child: Column(
           children: [
             Image.network(
-              'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+              imageUrl,
               width: 170.0,
             ),
             ListTile(
-              title: Text(bovine.name),
-              subtitle:
-                  Text(bovine.isBeefCattle ? "Gado de corte" : "Gado de Leite"),
+              title: Text(title),
+              subtitle: Text(subtitle),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
