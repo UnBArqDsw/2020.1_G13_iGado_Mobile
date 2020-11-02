@@ -35,13 +35,19 @@ class BovineService {
     }
   }
 
-  Future<Map<String, dynamic>> getAllBovine() async {
+  Future<List<Bovine>> getAllBovine() async {
     final response = await http.get(_api.url + 'bovine');
-    Map<String, dynamic> bovines = {"beef_cattles": [], "dairy_cattles": []};
+    List<Bovine> bovines = [];
     if (response.statusCode == 200) {
       var decodedBody = jsonDecode(response.body);
-      bovines["beef_cattles"] = decodedBody['beef_cattles'];
-      bovines["dairy_cattles"] = decodedBody['dairy_cattles'];
+      print(decodedBody['beef_cattles'].length);
+      for (var bovine in decodedBody['beef_cattles']) {
+        // print(bovine);
+        bovines.add(Bovine.fromJson({"data": bovine}));
+      }
+      for (var bovine in decodedBody['dairy_cattles']) {
+        bovines.add(Bovine.fromJson({"data": bovine}));
+      }
       return bovines;
     } else {
       throw Exception('Failed to load bovines');

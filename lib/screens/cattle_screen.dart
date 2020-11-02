@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:igado_front/components/simple_card.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
@@ -8,7 +9,7 @@ class CattleScreen extends StatefulWidget {
 }
 
 class _CattleScreenState extends State<CattleScreen> {
-  var bovineList;
+  List<dynamic> bovines = [];
   @override
   void initState() {
     super.initState();
@@ -16,8 +17,8 @@ class _CattleScreenState extends State<CattleScreen> {
   }
 
   void getBovinesData() async {
-    bovineList = await BovineService().getAllBovine();
-    print(bovineList);
+    bovines = await BovineService().getAllBovine();
+    print(bovines[0].name);
   }
 
   @override
@@ -32,7 +33,11 @@ class _CattleScreenState extends State<CattleScreen> {
             height: 250.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: kScrollMock,
+              children: bovines.map((dynamic bovine) {
+                return SimpleCard(
+                  bovine: bovine,
+                );
+              }).toList(),
             ),
           ),
           MaterialButton(
