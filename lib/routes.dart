@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:igado_front/screens/cattle_screen.dart';
 import 'package:igado_front/screens/main_screen.dart';
 import 'package:igado_front/screens/register_screen.dart';
 import 'screens/login_screen.dart';
@@ -9,4 +10,5 @@ Map<String, WidgetBuilder> kRoutes = {
   '/login': (context) => LoginPage(),
   '/register': (context) => RegisterScreen(),
   '/profile': (context) => ProfileScreen(),
+  '/cattle': (context) => CattleScreen()
 };
