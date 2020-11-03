@@ -65,6 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: kBrown2,
         automaticallyImplyLeading: false,
+        title: Text('Cadastro'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -75,13 +76,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Cadastro',
-                style: TextStyle(
-                    color: kBrown2,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold),
-              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Form(

@@ -17,7 +17,11 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFAD7B56),
       ),
       routes: kRoutes,
+<<<<<<< HEAD
       initialRoute: '/bovine',
+=======
+      initialRoute: '/',
+>>>>>>> b5aa5d0ca4745ea011e3dee27dea28659da6def6
     );
   }
 }
