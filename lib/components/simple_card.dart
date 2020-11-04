@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
-import 'package:igado_front/services/bovine_service.dart';
 
 class SimpleCard extends StatelessWidget {
   final String title;
@@ -28,7 +27,9 @@ class SimpleCard extends StatelessWidget {
                 MaterialButton(
                   minWidth: 60.0,
                   padding: EdgeInsets.all(0),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/databovine');
+                  },
                   child: Text(
                     "Ver",
                     style: TextStyle(

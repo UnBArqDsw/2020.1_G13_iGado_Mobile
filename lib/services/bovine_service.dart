@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:igado_front/services/api.dart';

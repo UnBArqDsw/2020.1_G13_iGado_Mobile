@@ -60,10 +60,15 @@ class _CattleScreenState extends State<CattleScreen> {
                   Icons.add,
                   color: Colors.white,
                 ),
-                Text(
-                  'Adicionar Bovino',
-                  style: TextStyle(
-                    color: Colors.white,
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/bovine');
+                  },
+                  child: Text(
+                    'Adicionar Bovino',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
