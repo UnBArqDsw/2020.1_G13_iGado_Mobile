@@ -7,8 +7,8 @@ class Destination {
 }
 
 const List<Destination> allDestinations = <Destination>[
-  Destination('Bovino', Icons.pets),
-  Destination('Relatório', Icons.assignment),
+  Destination('Bovinos', Icons.pets),
+  Destination('Relatórios', Icons.assignment),
   Destination('Início', Icons.home),
   Destination('Informações', Icons.info),
   Destination('Perfil', Icons.account_circle),

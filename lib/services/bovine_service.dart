@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:igado_front/services/api.dart';
@@ -32,6 +31,24 @@ class BovineService {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load bovine');
+    }
+  }
+
+  Future<List<Bovine>> getAllBovine() async {
+    final response = await http.get(_api.url + 'bovine');
+    List<Bovine> bovines = [];
+    if (response.statusCode == 200) {
+      var decodedBody = jsonDecode(response.body);
+      print(decodedBody['beef_cattles'].length);
+      for (var bovine in decodedBody['beef_cattles']) {
+        bovines.add(Bovine.fromJson({"data": bovine}));
+      }
+      for (var bovine in decodedBody['dairy_cattles']) {
+        bovines.add(Bovine.fromJson({"data": bovine}));
+      }
+      return bovines;
+    } else {
+      throw Exception('Failed to load bovines');
     }
   }
 }

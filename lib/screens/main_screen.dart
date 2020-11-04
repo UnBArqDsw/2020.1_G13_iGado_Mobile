@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
-import 'package:igado_front/screens/login_screen.dart';
+import 'package:igado_front/screens/cattle_screen.dart';
 import 'package:igado_front/screens/profile_screen.dart';
 import 'package:igado_front/screens/splash_screen.dart';
 import 'package:igado_front/utils/destination.dart';
@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   Destination destination;
   final tabs = [
-    SplashScreen(),
+    CattleScreen(),
     SplashScreen(),
     SplashScreen(),
     SplashScreen(),

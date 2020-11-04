@@ -41,6 +41,224 @@ InputDecoration kInputFormStyle = InputDecoration(
 //   Icons.lock_outline,
 //   Icons.lock_outline,
 // ];
+
+List<Widget> kScrollMock = <Widget>[
+  Container(
+    width: 170.0,
+    child: Card(
+      child: Column(
+        children: [
+          Image.network(
+            'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+            width: 170.0,
+          ),
+          ListTile(
+            title: Text("Gado 1"),
+            subtitle: Text("Gado de Corte"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MaterialButton(
+                minWidth: 60.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Text(
+                  "Ver",
+                  style: TextStyle(
+                    color: kBrown2,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                minWidth: 30.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Icon(
+                  Icons.more_vert,
+                  size: 12.0,
+                  color: kBrown2,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  ),
+  Container(
+    width: 170.0,
+    child: Card(
+      child: Column(
+        children: [
+          Image.network(
+            'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+            width: 170.0,
+          ),
+          ListTile(
+            title: Text("Gado 1"),
+            subtitle: Text("Gado de Corte"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MaterialButton(
+                minWidth: 60.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Text(
+                  "Ver",
+                  style: TextStyle(
+                    color: kBrown2,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                minWidth: 30.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Icon(
+                  Icons.more_vert,
+                  size: 12.0,
+                  color: kBrown2,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  ),
+  Container(
+    width: 170.0,
+    child: Card(
+      child: Column(
+        children: [
+          Image.network(
+            'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+            width: 170.0,
+          ),
+          ListTile(
+            title: Text("Gado 1"),
+            subtitle: Text("Gado de Corte"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MaterialButton(
+                minWidth: 60.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Text(
+                  "Ver",
+                  style: TextStyle(
+                    color: kBrown2,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                minWidth: 30.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Icon(
+                  Icons.more_vert,
+                  size: 12.0,
+                  color: kBrown2,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  ),
+  Container(
+    width: 170.0,
+    child: Card(
+      child: Column(
+        children: [
+          Image.network(
+            'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+            width: 170.0,
+          ),
+          ListTile(
+            title: Text("Gado 1"),
+            subtitle: Text("Gado de Corte"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MaterialButton(
+                minWidth: 60.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Text(
+                  "Ver",
+                  style: TextStyle(
+                    color: kBrown2,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                minWidth: 30.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Icon(
+                  Icons.more_vert,
+                  size: 12.0,
+                  color: kBrown2,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  ),
+  Container(
+    width: 170.0,
+    child: Card(
+      child: Column(
+        children: [
+          Image.network(
+            'https://blog.belgobekaert.com.br/agro/wp-content/uploads/sites/2/2020/05/cria%C3%A7%C3%A3o-de-gado-nelore.jpg',
+            width: 170.0,
+          ),
+          ListTile(
+            title: Text("Gado 1"),
+            subtitle: Text("Gado de Corte"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MaterialButton(
+                minWidth: 60.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Text(
+                  "Ver",
+                  style: TextStyle(
+                    color: kBrown2,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                minWidth: 30.0,
+                padding: EdgeInsets.all(0),
+                onPressed: () {},
+                child: Icon(
+                  Icons.more_vert,
+                  size: 12.0,
+                  color: kBrown2,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+  ),
+];
 // images
 
 String kLogo = 'assets/images/logo.png';

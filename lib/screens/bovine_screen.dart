@@ -231,7 +231,7 @@ class _BovineScreenState extends State<BovineScreen> {
               ),
               FlatButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/');
                 },
                 child: Text(
                   'Cancelar',

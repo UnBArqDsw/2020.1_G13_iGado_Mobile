@@ -13,7 +13,7 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
   @override
   void initState() {
     super.initState();
-    futureBovine = BovineService().fetchBovine(2);
+    futureBovine = BovineService().fetchBovine(1);
   }
 
   @override
@@ -53,7 +53,7 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image(
-                            image: AssetImage('assets/images/cow.jpg'),
+                            image: AssetImage('assets/images/cow2.jpg'),
                             height: 150.0,
                           ),
                           SizedBox(
