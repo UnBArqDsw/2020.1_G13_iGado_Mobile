@@ -202,15 +202,20 @@ class _BovineScreenState extends State<BovineScreen> {
                                   };
                                   response = bovineService
                                       .createBovine(data)
-                                      .then((value) => showAlert(
-                                            "Bovino cadastrado com sucesso!",
-                                            context,
-                                          ))
-                                      .catchError((e) {
+                                      .then((value) {
+                                    showAlert(
+                                      "Bovino cadastrado com sucesso!",
+                                      context,
+                                      () {
+                                        Navigator.pushNamed(context, '/');
+                                      },
+                                    );
+                                  }).catchError((e) {
                                     print(e);
                                     showAlert(
                                       "Opa, não foi possível criar bovino, verifique os dados ou tente novamente mais tarde.",
                                       context,
+                                      null,
                                     );
                                   });
                                 });

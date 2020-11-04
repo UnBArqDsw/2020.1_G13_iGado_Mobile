@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
+import 'package:igado_front/screens/data_bovine_screen.dart';
 
 class SimpleCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imageUrl;
-  SimpleCard({this.title, this.subtitle, this.imageUrl});
+  final int id;
+  SimpleCard({this.title, this.subtitle, this.imageUrl, this.id});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +30,13 @@ class SimpleCard extends StatelessWidget {
                   minWidth: 60.0,
                   padding: EdgeInsets.all(0),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/databovine');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DataBovineScreen(
+                            bovineId: id,
+                          ),
+                        ));
                   },
                   child: Text(
                     "Ver",

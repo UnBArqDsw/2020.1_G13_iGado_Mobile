@@ -44,6 +44,7 @@ class _CattleScreenState extends State<CattleScreen> {
                   title: bovine.name,
                   subtitle:
                       bovine.isBeefCattle ? "Gado de corte" : "Gado de Leite",
+                  id: bovine.bovineId,
                 );
               }).toList(),
             ),
