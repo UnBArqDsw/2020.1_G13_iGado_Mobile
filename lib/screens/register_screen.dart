@@ -214,12 +214,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       .then((value) => showAlert(
                                             "Usuário cadastrado com sucesso.",
                                             context,
+                                            null,
                                           ))
                                       .catchError((e) {
                                     print(e);
                                     showAlert(
                                       "Opa, não foi possível criar seu usuário, verifique seus dados ou tente novamente mais tarde.",
                                       context,
+                                      null,
                                     );
                                   });
                                 });
