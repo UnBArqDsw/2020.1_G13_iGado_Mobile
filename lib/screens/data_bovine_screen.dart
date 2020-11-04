@@ -3,6 +3,9 @@ import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
 class DataBovineScreen extends StatefulWidget {
+  final int bovineId;
+  DataBovineScreen({@required this.bovineId});
+
   @override
   _DataBovineScreenState createState() => _DataBovineScreenState();
 }
@@ -13,7 +16,7 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
   @override
   void initState() {
     super.initState();
-    futureBovine = BovineService().fetchBovine(1);
+    futureBovine = BovineService().fetchBovine(widget.bovineId);
   }
 
   @override
