@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 enum UserRole { owner, employee }
 enum BovineRole { beefCattle, dairyCattle }
+enum ReproductionManagementRole { naturalMount, insemination }
 // Colors
 Color kBrown1 = Color(0xFFC97946);
 Color kBrown2 = Color(0xFFAD7B56);
