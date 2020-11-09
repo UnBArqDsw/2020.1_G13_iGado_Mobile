@@ -95,7 +95,10 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                           ),
                           Center(
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, '/weighingmanagment');
+                              },
                               child: Text(
                                 'Realizar Manejo',
                                 style: TextStyle(
