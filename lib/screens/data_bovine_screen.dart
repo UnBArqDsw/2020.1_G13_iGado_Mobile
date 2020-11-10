@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
+import 'package:igado_front/screens/weighing_managment_screen.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
 class DataBovineScreen extends StatefulWidget {
@@ -95,7 +96,16 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                           ),
                           Center(
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          WeighingManagmentScreen(
+                                            bovineId: widget.bovineId,
+                                          )),
+                                );
+                              },
                               child: Text(
                                 'Realizar Manejo',
                                 style: TextStyle(

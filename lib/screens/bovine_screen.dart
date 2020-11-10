@@ -183,6 +183,7 @@ class _BovineScreenState extends State<BovineScreen> {
                                 setState(() {
                                   data = {
                                     "farm_id": 1,
+                                    "batch_of_beef": 1,
                                     "name": formResponse["name"],
                                     "breed": formResponse["breed"],
                                     "actual_weight":

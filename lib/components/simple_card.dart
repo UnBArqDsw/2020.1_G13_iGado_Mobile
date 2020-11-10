@@ -31,12 +31,13 @@ class SimpleCard extends StatelessWidget {
                   padding: EdgeInsets.all(0),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DataBovineScreen(
-                            bovineId: id,
-                          ),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DataBovineScreen(
+                          bovineId: id,
+                        ),
+                      ),
+                    );
                   },
                   child: Text(
                     "Ver",
