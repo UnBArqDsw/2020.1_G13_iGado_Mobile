@@ -63,6 +63,7 @@ class Bovine {
   final String geneticalEnhancement;
   final bool isPregnant;
   final int farmId;
+  final int batchOfBeef;
 
   Bovine(
       {this.bovineId,
@@ -73,7 +74,8 @@ class Bovine {
       this.isBeefCattle,
       this.geneticalEnhancement,
       this.isPregnant,
-      this.farmId});
+      this.farmId,
+      this.batchOfBeef});
 
   factory Bovine.fromJson(Map<String, dynamic> json) {
     return Bovine(
@@ -85,6 +87,7 @@ class Bovine {
         isBeefCattle: json['data']['is_beef_cattle'],
         geneticalEnhancement: json['data']['genetical_enhancement'],
         isPregnant: json['data']['is_pregnant'],
-        farmId: json['data']['farm_id']);
+        farmId: json['data']['farm_id'],
+        batchOfBeef: json['data']['batch_of_beef']);
   }
 }
