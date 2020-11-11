@@ -3,6 +3,7 @@ import 'package:igado_front/screens/data_bovine_screen.dart';
 import 'package:igado_front/screens/main_screen.dart';
 import 'package:igado_front/screens/register_screen.dart';
 import 'package:igado_front/screens/cattle_screen.dart';
+import 'package:igado_front/screens/reproduction_management_screen.dart';
 import 'package:igado_front/screens/weighing_managment_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/profile_screen.dart';
@@ -16,4 +17,5 @@ Map<String, WidgetBuilder> kRoutes = {
   '/profile': (context) => ProfileScreen(),
   '/bovine': (context) => BovineScreen(),
   '/cattle': (context) => CattleScreen(),
+  '/reproductionManagement': (context) => ReproductionManagementScreen(),
 };
