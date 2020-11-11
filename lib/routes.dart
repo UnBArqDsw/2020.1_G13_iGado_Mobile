@@ -17,5 +17,5 @@ Map<String, WidgetBuilder> kRoutes = {
   '/profile': (context) => ProfileScreen(),
   '/bovine': (context) => BovineScreen(),
   '/cattle': (context) => CattleScreen(),
-  '/reproductionManagement': (context) => ReproductionManagementScreen(),
+  '/reproductionManagement': (context) => ReproductionManagementScreen(bovineId: 1,),
 };

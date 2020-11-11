@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:igado_front/components/dropdown_icon_text.dart';
 import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/reproduction_management_service.dart';
 import 'package:igado_front/utils/alert_utils.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 ReproductionManagementService reproductionManagemenetService =
     new ReproductionManagementService();
@@ -146,62 +146,15 @@ class _ReproductionManagementScreenState
                         placeholder: "Quantidade de Inseminações",
                       ),
                       Visibility(
-                          visible: isInsemination,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.calendar_today,
-                                    color: kBrown1,
-                                  ),
-                                  Text(
-                                    "Período da Inseminação",
-                                    style: TextStyle(
-                                      color: kBrown1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              DropdownButton<String>(
-                                value: dropdownValue,
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: kBrown1,
-                                ),
-                                iconSize: 24,
-                                elevation: 16,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
-                                underline: Container(
-                                  height: 2,
-                                  color: kBrown1,
-                                ),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    dropdownValue = newValue;
-                                    formResponse["inseminationPeriod"] =
-                                        newValue;
-                                    print(newValue);
-                                  });
-                                },
-                                isExpanded: true,
-                                items: <String>[
-                                  'Manhã',
-                                  'Tarde',
-                                  'Noite'
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: new Align(
-                                        alignment: Alignment.center,
-                                        child: Text(value)),
-                                  );
-                                }).toList(),
-                              ),
-                            ],
-                          )),
+                        visible: isInsemination,
+                        child: DropdownIconText(
+                          icon: Icons.calendar_today,
+                          title: "Período da Inseminação",
+                          changeDictData: changeDictData("inseminationPeriod"),
+                          dropdownValue: 'Manhã',
+                          values: ['Manhã', 'Tarde', 'Noite'],
+                        ),
+                      ),
                       FlatButton(
                         onPressed: checkFormResponse(formResponse)
                             ? () {
