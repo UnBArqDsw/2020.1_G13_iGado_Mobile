@@ -51,7 +51,6 @@ class _BovineScreenState extends State<BovineScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

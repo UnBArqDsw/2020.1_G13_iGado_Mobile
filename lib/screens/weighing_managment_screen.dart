@@ -62,33 +62,24 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
-        title: Text('Manejo de Pesagem'),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: kBackgroundTheme,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-          child: Form(
-            child: Column(
-              children: [
-                Column(
-                  children: formInfoList.map((Map<String, dynamic> formInfo) {
-                    return IconTextFormField(
-                      title: formInfo["title"],
-                      icon: formInfo["icon"],
-                      placeholder: formInfo["placeholder"],
-                      obscureText: formInfo["obscureText"],
-                      onChange: changeDictData(formInfo["onChange"]),
-                    );
-                  }).toList(),
-                ),
-                FlatButton(
-                  onPressed: () {
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: formInfoList.map((Map<String, dynamic> formInfo) {
+              return IconTextFormField(
+                title: formInfo["title"],
+                icon: formInfo["icon"],
+                placeholder: formInfo["placeholder"],
+                obscureText: formInfo["obscureText"],
+                onChange: changeDictData(formInfo["onChange"]),
+              );
+            }).toList(),
+          ),
+          FlatButton(
+            onPressed: checkFormResponse(managementData)
+                ? () {
                     response = ManagementService()
                         .createWeighingManagement(managementData)
                         .then((value) => showAlert(
@@ -104,20 +95,27 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
                         null,
                       );
                     });
-                  },
-                  child: Text(
-                    'Manejar',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: kBrown2,
-                  disabledColor: kDisabledButtonColor,
-                ),
-              ],
+                  }
+                : null,
+            child: Text(
+              'Manejar',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            color: kBrown2,
+            disabledColor: kDisabledButtonColor,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Text(
+              'Cancelar',
+              style: TextStyle(color: kBrown1),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

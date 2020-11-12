@@ -61,165 +61,148 @@ class _ReproductionManagementScreenState
 
   String dropdownValue = 'Manhã';
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Manejo Reprodutivo',
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: false,
-        backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: kBackgroundTheme,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      IconTextFormField(
-                        title: "Raça do Touro",
-                        icon: Icons.pets,
-                        placeholder: "Digite a raça do touro",
-                        obscureText: false,
-                        onChange: changeDictData('bullBreed'),
-                      ),
-                      Text(
-                        "Tipo de Reprodução",
-                        style: TextStyle(
-                          color: kBrown1,
-                        ),
-                      ),
-                      Transform.scale(
-                        scale: 0.85,
-                        alignment: Alignment.topLeft,
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(0),
-                          title: Text('Monta Natural'),
-                          leading: Radio(
-                            activeColor: kBrown1,
-                            value: ReproductionManagementRole.naturalMount,
-                            groupValue: role,
-                            onChanged: (ReproductionManagementRole value) {
-                              setState(() {
-                                role = value;
-                                isNaturalMount = true;
-                                isInsemination = false;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Transform.scale(
-                        scale: 0.85,
-                        alignment: Alignment.topLeft,
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(0),
-                          title: Text('Inseminação Artificial'),
-                          leading: Radio(
-                            activeColor: kBrown1,
-                            value: ReproductionManagementRole.insemination,
-                            groupValue: role,
-                            onChanged: (ReproductionManagementRole value) {
-                              setState(() {
-                                role = value;
-                                isNaturalMount = false;
-                                isInsemination = true;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      VisibilityFormField(
-                        isVisible: isInsemination,
-                        title: "Quantidade de Inseminações",
-                        onChange: changeDictData("inseminationAmount"),
-                        placeholder: "Quantidade de Inseminações",
-                      ),
-                      Visibility(
-                        visible: isInsemination,
-                        child: DropdownIconText(
-                          icon: Icons.calendar_today,
-                          title: "Período da Inseminação",
-                          changeDictData: changeDictData("inseminationPeriod"),
-                          dropdownValue: 'Manhã',
-                          values: ['Manhã', 'Tarde', 'Noite'],
-                        ),
-                      ),
-                      FlatButton(
-                        onPressed: checkFormResponse(formResponse)
-                            ? () {
-                                setState(() {
-                                  data = {
-                                    "bovine_id": 1,
-                                    "bull_breed": formResponse["bullBreed"],
-                                    "reproduction_type": role ==
-                                            ReproductionManagementRole
-                                                .naturalMount
-                                        ? "natural mount"
-                                        : "insemination",
-                                    "insemination_amount": isInsemination
-                                        ? formResponse["inseminationAmount"]
-                                        : false,
-                                    "insemination_period": isInsemination
-                                        ? [formResponse["inseminationPeriod"]]
-                                        : false
-                                  };
-                                  response = reproductionManagemenetService
-                                      .performReproductionManagement(data)
-                                      .then((value) {
-                                    showAlert(
-                                      "Manejo reprodutivo realizado com sucesso!",
-                                      context,
-                                      () {
-                                        Navigator.pushNamed(context, '/');
-                                      },
-                                    );
-                                  }).catchError((e) {
-                                    print(e);
-                                    showAlert(
-                                      "Opa, não foi possível realizar o Manejo Reprodutivo",
-                                      context,
-                                      null,
-                                    );
-                                  });
-                                });
-                              }
-                            : null,
-                        child: Text(
-                          'Adicionar',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        color: kBrown2,
-                        disabledColor: kDisabledButtonColor,
-                      ),
-                    ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IconTextFormField(
+                    title: "Raça do Touro",
+                    icon: Icons.pets,
+                    placeholder: "Digite a raça do touro",
+                    obscureText: false,
+                    onChange: changeDictData('bullBreed'),
                   ),
-                ),
+                  Text(
+                    "Tipo de Reprodução",
+                    style: TextStyle(
+                      color: kBrown1,
+                    ),
+                  ),
+                  Transform.scale(
+                    scale: 0.85,
+                    alignment: Alignment.topLeft,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      title: Text('Monta Natural'),
+                      leading: Radio(
+                        activeColor: kBrown1,
+                        value: ReproductionManagementRole.naturalMount,
+                        groupValue: role,
+                        onChanged: (ReproductionManagementRole value) {
+                          setState(() {
+                            role = value;
+                            isNaturalMount = true;
+                            isInsemination = false;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Transform.scale(
+                    scale: 0.85,
+                    alignment: Alignment.topLeft,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      title: Text('Inseminação Artificial'),
+                      leading: Radio(
+                        activeColor: kBrown1,
+                        value: ReproductionManagementRole.insemination,
+                        groupValue: role,
+                        onChanged: (ReproductionManagementRole value) {
+                          setState(() {
+                            role = value;
+                            isNaturalMount = false;
+                            isInsemination = true;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  VisibilityFormField(
+                    isVisible: isInsemination,
+                    title: "Quantidade de Inseminações",
+                    onChange: changeDictData("inseminationAmount"),
+                    placeholder: "Quantidade de Inseminações",
+                  ),
+                  Visibility(
+                    visible: isInsemination,
+                    child: DropdownIconText(
+                      icon: Icons.calendar_today,
+                      title: "Período da Inseminação",
+                      changeDictData: changeDictData("inseminationPeriod"),
+                      dropdownValue: 'Manhã',
+                      values: ['Manhã', 'Tarde', 'Noite'],
+                    ),
+                  ),
+                  FlatButton(
+                    onPressed: checkFormResponse(formResponse)
+                        ? () {
+                            setState(() {
+                              data = {
+                                "bovine_id": 1,
+                                "bull_breed": formResponse["bullBreed"],
+                                "reproduction_type": role ==
+                                        ReproductionManagementRole.naturalMount
+                                    ? "natural mount"
+                                    : "insemination",
+                                "insemination_amount": isInsemination
+                                    ? formResponse["inseminationAmount"]
+                                    : false,
+                                "insemination_period": isInsemination
+                                    ? [formResponse["inseminationPeriod"]]
+                                    : false
+                              };
+                              response = reproductionManagemenetService
+                                  .performReproductionManagement(data)
+                                  .then((value) {
+                                showAlert(
+                                  "Manejo reprodutivo realizado com sucesso!",
+                                  context,
+                                  () {
+                                    Navigator.pushNamed(context, '/');
+                                  },
+                                );
+                              }).catchError((e) {
+                                print(e);
+                                showAlert(
+                                  "Opa, não foi possível realizar o Manejo Reprodutivo",
+                                  context,
+                                  null,
+                                );
+                              });
+                            });
+                          }
+                        : null,
+                    child: Text(
+                      'Manejar',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    color: kBrown2,
+                    disabledColor: kDisabledButtonColor,
+                  ),
+                ],
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  'Cancelar',
-                  style: TextStyle(color: kBrown1),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Text(
+              'Cancelar',
+              style: TextStyle(color: kBrown1),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -64,7 +64,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
         title: Text('Cadastro'),
       ),
       body: Container(
