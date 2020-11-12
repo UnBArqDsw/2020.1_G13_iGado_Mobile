@@ -7,8 +7,8 @@ enum ReproductionManagementRole { naturalMount, insemination }
 // Colors
 Color kBrown1 = Color(0xFFC97946);
 Color kBrown2 = Color(0xFFAD7B56);
-Color kDisabledButtonColor = Color(0xFFC8C8C8);
 Color kBege1 = Color(0xFFEFC19D);
+Color kDisabledButtonColor = Color(0xFFC8C8C8);
 //Styles
 Decoration kBackgroundTheme = BoxDecoration(
   gradient: LinearGradient(

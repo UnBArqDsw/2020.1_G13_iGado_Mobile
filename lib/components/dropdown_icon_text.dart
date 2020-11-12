@@ -7,7 +7,12 @@ class DropdownIconText extends StatefulWidget {
   final Function changeDictData;
   final IconData icon;
   final String title;
-  DropdownIconText({this.dropdownValue, this.values, this.changeDictData, this.icon, this.title});
+  DropdownIconText(
+      {this.dropdownValue,
+      this.values,
+      this.changeDictData,
+      this.icon,
+      this.title});
   @override
   _DropdownIconTextState createState() => _DropdownIconTextState();
 }
@@ -42,6 +47,7 @@ class _DropdownIconTextState extends State<DropdownIconText> {
         ),
         DropdownButton<String>(
           value: dropdownValue,
+          dropdownColor: Color(0xFFEBEBEB),
           icon: Icon(
             Icons.arrow_drop_down,
             color: kBrown1,
@@ -65,9 +71,7 @@ class _DropdownIconTextState extends State<DropdownIconText> {
           items: widget.values.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: new Align(
-                  alignment: Alignment.center,
-                  child: Text(value)),
+              child: new Align(alignment: Alignment.center, child: Text(value)),
             );
           }).toList(),
         ),

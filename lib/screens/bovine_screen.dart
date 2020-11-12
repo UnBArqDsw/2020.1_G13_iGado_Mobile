@@ -51,6 +51,7 @@ class _BovineScreenState extends State<BovineScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
+        title: Text('Adicionar Bovino'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -61,13 +62,6 @@ class _BovineScreenState extends State<BovineScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Adicionar Bovino',
-                style: TextStyle(
-                    color: kBrown2,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold),
-              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Form(
