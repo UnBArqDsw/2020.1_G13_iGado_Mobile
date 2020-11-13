@@ -29,6 +29,37 @@ class _BovineScreenState extends State<BovineScreen> {
     "isPregnant": false,
   };
 
+  List<Map<String, dynamic>> formInfoList = [
+    {
+      "title": "Nome",
+      "icon": MaterialCommunityIcons.cow,
+      "placeholder": "Digite o nome do bovino",
+      "obscureText": false,
+      "onChange": 'name',
+    },
+    {
+      "title": "Raça",
+      "icon": Icons.pets,
+      "placeholder": "Digite a raça do bovino",
+      "obscureText": false,
+      "onChange": 'breed',
+    },
+    {
+      "title": "Data de nascimento",
+      "icon": FontAwesome.calendar,
+      "placeholder": "Digite a data de nascimento",
+      "obscureText": false,
+      "onChange": 'dateOfBirth',
+    },
+    {
+      "title": "Peso atual",
+      "icon": MaterialCommunityIcons.weight,
+      "placeholder": "Digite o peso atual do bovino",
+      "obscureText": false,
+      "onChange": 'actualWeight',
+    },
+  ];
+
   bool checkFormResponse(formResponse) {
     if (formResponse["name"].isEmpty ||
         formResponse["breed"].isEmpty ||
@@ -68,33 +99,16 @@ class _BovineScreenState extends State<BovineScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconTextFormField(
-                        title: "Nome",
-                        icon: MaterialCommunityIcons.cow,
-                        placeholder: "Digite o nome do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('name'),
-                      ),
-                      IconTextFormField(
-                        title: "Raça",
-                        icon: Icons.pets,
-                        placeholder: "Digite a raça do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('breed'),
-                      ),
-                      IconTextFormField(
-                        title: "Data de nascimento",
-                        icon: FontAwesome.calendar,
-                        placeholder: "Digite a data de nascimento",
-                        obscureText: false,
-                        onChange: changeDictData('dateOfBirth'),
-                      ),
-                      IconTextFormField(
-                        title: "Peso atual",
-                        icon: MaterialCommunityIcons.weight,
-                        placeholder: "Digite o peso atual do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('actualWeight'),
+                      Column(
+                        children: formInfoList.map((Map<String, dynamic> formInfo) {
+                          return IconTextFormField(
+                            title: formInfo["title"],
+                            icon: formInfo["icon"],
+                            placeholder: formInfo["placeholder"],
+                            obscureText: formInfo["obscureText"],
+                            onChange: changeDictData(formInfo["onChange"]),
+                          );
+                        }).toList(),
                       ),
                       Text(
                         "Tipo de gado",
@@ -194,6 +208,7 @@ class _BovineScreenState extends State<BovineScreen> {
                                         ? formResponse["isPregnant"]
                                         : false,
                                   };
+                                  print(data);
                                   response = bovineService
                                       .createBovine(data)
                                       .then((value) {

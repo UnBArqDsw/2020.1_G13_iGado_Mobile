@@ -19,6 +19,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
     "actual_weight": "",
     "date_of_actual_weighing": "",
     "bovine_id": "",
+    "type": "weighing_management" 
   };
   List<Map<String, dynamic>> formInfoList = [
     {
@@ -27,13 +28,6 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
       "placeholder": "Digite o peso atual do bovino",
       "obscureText": false,
       "onChange": "actual_weight",
-    },
-    {
-      "title": "Data da pesagem",
-      "icon": Icons.calendar_today,
-      "placeholder": "Digite a data que o bovino foi pesado",
-      "obscureText": false,
-      "onChange": "date_of_actual_weighing",
     }
   ];
   var response;
@@ -44,12 +38,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
   }
 
   bool checkFormResponse(formResponse) {
-    if (formResponse["actual_weight"].isEmpty ||
-        formResponse["bovine_id"].isEmpty ||
-        formResponse["date_of_actual_weighing"].isEmpty) {
-      return false;
-    }
-    return true;
+    return !formResponse["actual_weight"].isEmpty;
   }
 
   Function changeDictData(String field) {
@@ -81,7 +70,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
             onPressed: checkFormResponse(managementData)
                 ? () {
                     response = ManagementService()
-                        .createWeighingManagement(managementData)
+                        .performManagement(managementData)
                         .then((value) => showAlert(
                               "Manejo realizado com sucesso.",
                               context,

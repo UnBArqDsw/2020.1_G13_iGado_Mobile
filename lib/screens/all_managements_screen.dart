@@ -40,21 +40,23 @@ class _AllManagementsScreenState extends State<AllManagementsScreen> {
           decoration: kBackgroundTheme,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            child: Column(
-              children: [
-                DropdownIconText(
-                  icon: Icons.calendar_today,
-                  title: 'Manejo a ser realizado',
-                  changeDictData: (value) {
-                    setState(() {
-                      _currentIndex = value;
-                    });
-                  },
-                  dropdownValue: 'Manejo de Pesagem',
-                  values: ['Manejo de Pesagem', 'Manejo de Reprodução'],
-                ),
-                managements[_currentIndex],
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  DropdownIconText(
+                    icon: Icons.calendar_today,
+                    title: 'Manejo a ser realizado',
+                    changeDictData: (value) {
+                      setState(() {
+                        _currentIndex = value;
+                      });
+                    },
+                    dropdownValue: 'Manejo de Pesagem',
+                    values: ['Manejo de Pesagem', 'Manejo de Reprodução'],
+                  ),
+                  managements[_currentIndex],
+                ],
+              ),
             ),
           )),
     );
