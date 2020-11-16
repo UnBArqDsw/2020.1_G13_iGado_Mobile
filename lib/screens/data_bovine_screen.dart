@@ -27,7 +27,6 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Bovine bovineInfo = snapshot.data;
-          print(bovineInfo);
           return Scaffold(
             appBar: AppBar(
               backgroundColor: kBrown2,
@@ -43,13 +42,6 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Gado ${bovineInfo.bovineId.toString()}',
-                      style: TextStyle(
-                          color: kBrown2,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold),
-                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 35, 10, 10),
                       child: Column(
@@ -95,24 +87,47 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                             height: 115.0,
                           ),
                           Center(
-                            child: FlatButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          WeighingManagmentScreen(
-                                            bovineId: widget.bovineId,
-                                          )),
-                                );
-                              },
-                              child: Text(
-                                'Realizar Manejo',
-                                style: TextStyle(
-                                  color: Colors.white,
+                            child: Column(
+                              children: [
+                                FlatButton(
+                                  minWidth: 150,
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/edit_bovine',
+                                      arguments: bovineInfo,
+                                    );
+                                  },
+                                  child: Text(
+                                    'Editar Bovino',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  color: kBrown2,
                                 ),
-                              ),
-                              color: kBrown2,
+                                FlatButton(
+                                  minWidth: 150,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            WeighingManagmentScreen(
+                                          bovineId: widget.bovineId,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Realizar Manejo',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  color: kBrown2,
+                                ),
+                              ],
                             ),
                           )
                         ],

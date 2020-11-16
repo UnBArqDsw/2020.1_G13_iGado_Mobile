@@ -9,6 +9,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 BovineService bovineService = new BovineService();
 
 class BovineScreen extends StatefulWidget {
+  bool isEditCattle;
+  BovineScreen({@required this.isEditCattle});
   @override
   _BovineScreenState createState() => _BovineScreenState();
 }
@@ -19,6 +21,7 @@ class _BovineScreenState extends State<BovineScreen> {
   bool isDairyCattle = false;
   Map<String, dynamic> data;
   var response;
+  final Map<String, String> _formData = {};
 
   Map<String, dynamic> formResponse = {
     "name": "",
@@ -47,7 +50,23 @@ class _BovineScreenState extends State<BovineScreen> {
     };
   }
 
+  void _loadFormData(Bovine bovineInfo) {
+    if (bovineInfo != null) {
+      _formData['bovineId'] = bovineInfo.bovineId.toString();
+      _formData['name'] = bovineInfo.name;
+      _formData['breed'] = bovineInfo.breed;
+      _formData['actualWeight'] = bovineInfo.actualWeight.toString();
+      _formData['dateOfBirth'] = bovineInfo.dateOfBirth;
+      _formData['geneticalEnhancement'] = bovineInfo.geneticalEnhancement;
+      _formData['isPregnant'] = bovineInfo.isPregnant.toString();
+    }
+  }
+
   Widget build(BuildContext context) {
+    final Bovine bovineInfo = ModalRoute.of(context).settings.arguments;
+
+    _loadFormData(bovineInfo);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
@@ -63,7 +82,7 @@ class _BovineScreenState extends State<BovineScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Adicionar Bovino',
+                bovineInfo == null ? 'Adicionar Bovino' : 'Editar Bovino',
                 style: TextStyle(
                     color: kBrown2,
                     fontSize: 30.0,
@@ -76,6 +95,7 @@ class _BovineScreenState extends State<BovineScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       IconTextFormField(
+                        initialValue: _formData['name'],
                         title: "Nome",
                         icon: MaterialCommunityIcons.cow,
                         placeholder: "Digite o nome do bovino",
@@ -83,6 +103,7 @@ class _BovineScreenState extends State<BovineScreen> {
                         onChange: changeDictData('name'),
                       ),
                       IconTextFormField(
+                        initialValue: _formData['breed'],
                         title: "Raça",
                         icon: Icons.pets,
                         placeholder: "Digite a raça do bovino",
@@ -90,6 +111,7 @@ class _BovineScreenState extends State<BovineScreen> {
                         onChange: changeDictData('breed'),
                       ),
                       IconTextFormField(
+                        initialValue: _formData['dateOfBirth'],
                         title: "Data de nascimento",
                         icon: FontAwesome.calendar,
                         placeholder: "Digite a data de nascimento",
@@ -97,6 +119,7 @@ class _BovineScreenState extends State<BovineScreen> {
                         onChange: changeDictData('dateOfBirth'),
                       ),
                       IconTextFormField(
+                        initialValue: _formData['actualWeight'],
                         title: "Peso atual",
                         icon: MaterialCommunityIcons.weight,
                         placeholder: "Digite o peso atual do bovino",
@@ -172,68 +195,185 @@ class _BovineScreenState extends State<BovineScreen> {
                         visible: isDairyCattle,
                       ),
                       VisibilityFormField(
+                        initialValue: _formData['geneticalEnhancement'],
                         isVisible: isBeefCattle,
                         title: "Melhoramento genético",
                         onChange: changeDictData('geneticalEnhancement'),
                         placeholder: "Melhoramento genético",
                       ),
-                      FlatButton(
-                        onPressed: checkFormResponse(formResponse)
-                            ? () {
-                                setState(() {
-                                  data = {
-                                    "farm_id": 1,
-                                    "batch_of_beef": 1,
-                                    "name": formResponse["name"],
-                                    "breed": formResponse["breed"],
-                                    "actual_weight":
-                                        formResponse["actualWeight"],
-                                    "date_of_birth":
-                                        formResponse["dateOfBirth"],
-                                    "is_beef_cattle":
-                                        role == BovineRole.beefCattle
-                                            ? true
-                                            : false,
-                                    "genetical_enhancement": isBeefCattle
-                                        ? formResponse["geneticalEnhancement"]
-                                        : false,
-                                    "is_pregnant": isDairyCattle
-                                        ? formResponse["isPregnant"]
-                                        : false,
-                                  };
-                                  response = bovineService
-                                      .createBovine(data)
-                                      .then((value) {
-                                    showAlert(
-                                      "Bovino cadastrado com sucesso!",
-                                      context,
-                                      () {
-                                        Navigator.pushNamed(context, '/');
-                                      },
-                                    );
-                                  }).catchError((e) {
-                                    print(e);
-                                    showAlert(
-                                      "Opa, não foi possível criar bovino, verifique os dados ou tente novamente mais tarde.",
-                                      context,
-                                      null,
-                                    );
+                      Visibility(
+                        child: FlatButton(
+                          onPressed: checkFormResponse(formResponse)
+                              ? () {
+                                  setState(() {
+                                    data = {
+                                      "farm_id": 1,
+                                      "batch_of_beef": 1,
+                                      "name": formResponse["name"],
+                                      "breed": formResponse["breed"],
+                                      "actual_weight":
+                                          formResponse["actualWeight"],
+                                      "date_of_birth":
+                                          formResponse["dateOfBirth"],
+                                      "is_beef_cattle":
+                                          role == BovineRole.beefCattle
+                                              ? true
+                                              : false,
+                                      "genetical_enhancement": isBeefCattle
+                                          ? formResponse["geneticalEnhancement"]
+                                          : false,
+                                      "is_pregnant": isDairyCattle
+                                          ? formResponse["isPregnant"]
+                                          : false,
+                                    };
+                                    response = bovineService
+                                        .createBovine(data)
+                                        .then((value) {
+                                      showAlert(
+                                        "Bovino cadastrado com sucesso!",
+                                        context,
+                                        () {
+                                          Navigator.pushNamed(context, '/');
+                                        },
+                                      );
+                                    }).catchError((e) {
+                                      print(e);
+                                      showAlert(
+                                        "Opa, não foi possível criar bovino, verifique os dados ou tente novamente mais tarde.",
+                                        context,
+                                        null,
+                                      );
+                                    });
                                   });
-                                });
-                              }
-                            : null,
-                        child: Text(
-                          'Adicionar',
-                          style: TextStyle(
-                            color: Colors.white,
+                                }
+                              : null,
+                          child: Text(
+                            'Adicionar',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
+                          color: kBrown2,
+                          disabledColor: kDisabledButtonColor,
                         ),
-                        color: kBrown2,
-                        disabledColor: kDisabledButtonColor,
+                        visible: !widget.isEditCattle,
+                      ),
+                      Visibility(
+                        child: FlatButton(
+                          minWidth: 100,
+                          onPressed: () {
+                            setState(() {
+                              data = {
+                                "farm_id": 1,
+                                "batch_of_beef": 1,
+                                "name": formResponse["name"].length > 0
+                                    ? formResponse["name"]
+                                    : _formData['name'],
+                                "breed": formResponse["breed"].length > 0
+                                    ? formResponse["breed"]
+                                    : _formData['breed'],
+                                "actual_weight":
+                                    formResponse["actualWeight"].length > 0
+                                        ? formResponse["actualWeight"]
+                                        : _formData['actualWeight'],
+                                "date_of_birth":
+                                    formResponse["dateOfBirth"].length > 0
+                                        ? formResponse["dateOfBirth"]
+                                        : _formData['dateOfBirth'],
+                                "is_beef_cattle": role == BovineRole.beefCattle
+                                    ? true
+                                    : false,
+                                "genetical_enhancement": isBeefCattle
+                                    ? (formResponse["geneticalEnhancement"]
+                                                .length >
+                                            0
+                                        ? formResponse["geneticalEnhancement"]
+                                        : _formData["geneticalEnhancement"])
+                                    : false,
+                                "is_pregnant": isDairyCattle
+                                    ? formResponse["isPregnant"]
+                                    : false,
+                              };
+                              response = bovineService
+                                  .updateBovine(data, bovineInfo.bovineId)
+                                  .then((value) {
+                                showAlert(
+                                  "Bovino editado com sucesso!",
+                                  context,
+                                  () {
+                                    Navigator.pushNamed(context, '/');
+                                  },
+                                );
+                              }).catchError((e) {
+                                print(e);
+                                showAlert(
+                                  "Opa, não foi possível editar o bovino, verifique os dados ou tente novamente mais tarde.",
+                                  context,
+                                  null,
+                                );
+                              });
+                            });
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Editar',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Icon(Icons.edit),
+                            ],
+                          ),
+                          color: kBrown2,
+                          disabledColor: kDisabledButtonColor,
+                        ),
+                        visible: widget.isEditCattle,
                       ),
                     ],
                   ),
                 ),
+              ),
+              Visibility(
+                child: FlatButton(
+                  minWidth: 100,
+                  onPressed: () {
+                    response = bovineService
+                        .deleteBovine(bovineInfo.bovineId)
+                        .then((value) {
+                      showAlert(
+                        "Bovino excluido com sucesso!",
+                        context,
+                        () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                      );
+                    }).catchError((e) {
+                      print(e);
+                      showAlert(
+                        "Opa, não foi possível excluir o bovino, verifique os dados ou tente novamente mais tarde.",
+                        context,
+                        null,
+                      );
+                    });
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Excluir',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Icon(Icons.delete),
+                    ],
+                  ),
+                  color: Colors.red,
+                  disabledColor: kDisabledButtonColor,
+                ),
+                visible: widget.isEditCattle,
               ),
               FlatButton(
                 onPressed: () {
