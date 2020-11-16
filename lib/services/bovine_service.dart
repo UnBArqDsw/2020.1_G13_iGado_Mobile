@@ -22,11 +22,24 @@ class BovineService {
 
   Future<Bovine> fetchBovine(int id) async {
     final response = await http.get(_api.url + 'bovine/${id.toString()}');
-    print(response);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       return Bovine.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load bovine');
+    }
+  }
+
+  Future<dynamic> deleteBovine(int id) async {
+    print(id);
+    final response = await http.delete(_api.url + 'bovine/${id.toString()}');
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return 200;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -50,6 +63,23 @@ class BovineService {
     } else {
       throw Exception('Failed to load bovines');
     }
+  }
+
+  Future<dynamic> updateBovine(Map data, int id) async {
+    var url = _api.url + 'bovine/${id.toString()}';
+    print(data);
+    var response = await http.patch(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
+    int statusCode = response.statusCode;
+    if (statusCode == 200) {
+      return jsonDecode(response.body);
+    } else
+      throw Exception('Failed to update bovine. Error $statusCode');
   }
 }
 
