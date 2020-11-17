@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:igado_front/screens/all_managements_screen.dart';
 import 'package:igado_front/screens/data_bovine_screen.dart';
 import 'package:igado_front/screens/main_screen.dart';
 import 'package:igado_front/screens/register_screen.dart';
@@ -17,5 +18,10 @@ Map<String, WidgetBuilder> kRoutes = {
   '/profile': (context) => ProfileScreen(),
   '/bovine': (context) => BovineScreen(),
   '/cattle': (context) => CattleScreen(),
-  '/reproductionManagement': (context) => ReproductionManagementScreen(),
+  '/reproductionManagement': (context) => ReproductionManagementScreen(
+        bovineId: 1,
+      ),
+  '/managements': (context) => AllManagementsScreen(
+        bovineId: 1,
+      ),
 };

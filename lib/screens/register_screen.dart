@@ -31,6 +31,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "farmSize": "",
   };
 
+  List<Map<String, dynamic>> formInfoList = [
+    {
+      "title": "Nome Completo",
+      "icon": Icons.person_outline,
+      "placeholder": "Digite seu nome",
+      "obscureText": false,
+      "onChange": 'fullName',
+    },
+    {
+      "title": "Data de Nascimento",
+      "icon": Icons.calendar_today,
+      "placeholder": "Digite sua data de nascimento",
+      "obscureText": false,
+      "onChange": "date",
+    },
+    {
+      "title": "E-mail",
+      "icon": Icons.mail_outline,
+      "placeholder": "Digite seu e-mail",
+      "obscureText": false,
+      "onChange": 'email',
+    },
+    {
+      "title": "Confirme seu e-mail",
+      "icon": Icons.mail_outline,
+      "placeholder": "Confirme seu e-mail",
+      "obscureText": false,
+      "onChange": 'emailConfirm',
+    },
+    {
+      "title": "Senha",
+      "icon": Icons.lock_outline,
+      "placeholder": "Digite sua senha",
+      "obscureText": true,
+      "onChange": 'password',
+    },
+    {
+      "title": "Confirme sua Senha",
+      "icon": Icons.lock_outline,
+      "placeholder": "Confirme sua senha",
+      "obscureText": true,
+      "onChange": 'passwordConfirm',
+    },
+  ];
+
   bool checkFormResponse(formResponse) {
     if (formResponse["fullName"].isEmpty ||
         formResponse["email"].isEmpty ||
@@ -64,7 +109,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
         title: Text('Cadastro'),
       ),
       body: Container(
@@ -82,47 +126,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconTextFormField(
-                        title: "Nome Completo",
-                        icon: Icons.person_outline,
-                        placeholder: "Digite seu nome",
-                        obscureText: false,
-                        onChange: changeDictData('fullName'),
-                      ),
-                      IconTextFormField(
-                        title: "Data de Nascimento",
-                        icon: Icons.calendar_today,
-                        placeholder: "Digite sua data de nascimento",
-                        obscureText: false,
-                        onChange: changeDictData('date'),
-                      ),
-                      IconTextFormField(
-                        title: "E-mail",
-                        icon: Icons.mail_outline,
-                        placeholder: "Digite seu e-mail",
-                        obscureText: false,
-                        onChange: changeDictData('email'),
-                      ),
-                      IconTextFormField(
-                        title: "Confirme seu e-mail",
-                        icon: Icons.mail_outline,
-                        placeholder: "Confirme seu e-mail",
-                        obscureText: false,
-                        onChange: changeDictData('emailConfirm'),
-                      ),
-                      IconTextFormField(
-                        title: "Senha",
-                        icon: Icons.lock_outline,
-                        placeholder: "Digite sua senha",
-                        obscureText: true,
-                        onChange: changeDictData('password'),
-                      ),
-                      IconTextFormField(
-                        title: "Confirme sua Senha",
-                        icon: Icons.lock_outline,
-                        placeholder: "Confirme sua senha",
-                        obscureText: true,
-                        onChange: changeDictData('passwordConfirm'),
+                      Column(
+                        children:
+                            formInfoList.map((Map<String, dynamic> formInfo) {
+                          return IconTextFormField(
+                            title: formInfo["title"],
+                            icon: formInfo["icon"],
+                            placeholder: formInfo["placeholder"],
+                            obscureText: formInfo["obscureText"],
+                            onChange: changeDictData(formInfo["onChange"]),
+                          );
+                        }).toList(),
                       ),
                       Text(
                         "Função na fazenda",
