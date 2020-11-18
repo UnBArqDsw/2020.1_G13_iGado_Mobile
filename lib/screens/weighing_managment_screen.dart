@@ -4,6 +4,7 @@ import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/management_service.dart';
 import 'package:igado_front/utils/alert_utils.dart';
+import 'package:igado_front/services/bovine_service.dart';
 
 class WeighingManagmentScreen extends StatefulWidget {
   int bovineId;
@@ -19,6 +20,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
     "actual_weight": "",
     "date_of_actual_weighing": "",
     "bovine_id": "",
+    "type": "weighing_management"
   };
   List<Map<String, dynamic>> formInfoList = [
     {
@@ -27,13 +29,6 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
       "placeholder": "Digite o peso atual do bovino",
       "obscureText": false,
       "onChange": "actual_weight",
-    },
-    {
-      "title": "Data da pesagem",
-      "icon": Icons.calendar_today,
-      "placeholder": "Digite a data que o bovino foi pesado",
-      "obscureText": false,
-      "onChange": "date_of_actual_weighing",
     }
   ];
   var response;
@@ -44,12 +39,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
   }
 
   bool checkFormResponse(formResponse) {
-    if (formResponse["actual_weight"].isEmpty ||
-        formResponse["bovine_id"].isEmpty ||
-        formResponse["date_of_actual_weighing"].isEmpty) {
-      return false;
-    }
-    return true;
+    return !formResponse["actual_weight"].isEmpty;
   }
 
   Function changeDictData(String field) {
@@ -62,35 +52,26 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
-        title: Text('Manejo de Pesagem'),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: kBackgroundTheme,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-          child: Form(
-            child: Column(
-              children: [
-                Column(
-                  children: formInfoList.map((Map<String, dynamic> formInfo) {
-                    return IconTextFormField(
-                      title: formInfo["title"],
-                      icon: formInfo["icon"],
-                      placeholder: formInfo["placeholder"],
-                      obscureText: formInfo["obscureText"],
-                      onChange: changeDictData(formInfo["onChange"]),
-                    );
-                  }).toList(),
-                ),
-                FlatButton(
-                  onPressed: () {
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: formInfoList.map((Map<String, dynamic> formInfo) {
+              return IconTextFormField(
+                title: formInfo["title"],
+                icon: formInfo["icon"],
+                placeholder: formInfo["placeholder"],
+                obscureText: formInfo["obscureText"],
+                onChange: changeDictData(formInfo["onChange"]),
+              );
+            }).toList(),
+          ),
+          FlatButton(
+            onPressed: checkFormResponse(managementData)
+                ? () {
                     response = ManagementService()
-                        .createWeighingManagement(managementData)
+                        .performManagement(managementData)
                         .then((value) => showAlert(
                               "Manejo realizado com sucesso.",
                               context,
@@ -104,20 +85,27 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
                         null,
                       );
                     });
-                  },
-                  child: Text(
-                    'Manejar',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: kBrown2,
-                  disabledColor: kDisabledButtonColor,
-                ),
-              ],
+                  }
+                : null,
+            child: Text(
+              'Manejar',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            color: kBrown2,
+            disabledColor: kDisabledButtonColor,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Text(
+              'Cancelar',
+              style: TextStyle(color: kBrown1),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

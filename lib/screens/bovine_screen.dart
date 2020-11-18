@@ -32,6 +32,41 @@ class _BovineScreenState extends State<BovineScreen> {
     "isPregnant": false,
   };
 
+  List<Map<String, dynamic>> formInfoList = [
+    {
+      "initialValue": "name",
+      "title": "Nome",
+      "icon": MaterialCommunityIcons.cow,
+      "placeholder": "Digite o nome do bovino",
+      "obscureText": false,
+      "onChange": 'name',
+    },
+    {
+      "initialValue": "breed",
+      "title": "Raça",
+      "icon": Icons.pets,
+      "placeholder": "Digite a raça do bovino",
+      "obscureText": false,
+      "onChange": 'breed',
+    },
+    {
+      "initialValue": "dateOfBirth",
+      "title": "Data de nascimento",
+      "icon": FontAwesome.calendar,
+      "placeholder": "Digite a data de nascimento",
+      "obscureText": false,
+      "onChange": 'dateOfBirth',
+    },
+    {
+      "initialValue": "actualWeight",
+      "title": "Peso atual",
+      "icon": MaterialCommunityIcons.weight,
+      "placeholder": "Digite o peso atual do bovino",
+      "obscureText": false,
+      "onChange": 'actualWeight',
+    },
+  ];
+
   bool checkFormResponse(formResponse) {
     if (formResponse["name"].isEmpty ||
         formResponse["breed"].isEmpty ||
@@ -59,6 +94,11 @@ class _BovineScreenState extends State<BovineScreen> {
       _formData['dateOfBirth'] = bovineInfo.dateOfBirth;
       _formData['geneticalEnhancement'] = bovineInfo.geneticalEnhancement;
       _formData['isPregnant'] = bovineInfo.isPregnant.toString();
+      setState(() {
+        isBeefCattle = _formData['geneticalEnhancement'] != null;
+        isDairyCattle = _formData['geneticalEnhancement'] == null;
+        role = (isBeefCattle ? BovineRole.beefCattle : BovineRole.dairyCattle);
+      });
     }
   }
 
@@ -70,7 +110,7 @@ class _BovineScreenState extends State<BovineScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBrown2,
-        automaticallyImplyLeading: false,
+        title: Text(bovineInfo == null ? 'Adicionar Bovino' : 'Editar Bovino'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -81,50 +121,24 @@ class _BovineScreenState extends State<BovineScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                bovineInfo == null ? 'Adicionar Bovino' : 'Editar Bovino',
-                style: TextStyle(
-                    color: kBrown2,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold),
-              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Form(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconTextFormField(
-                        initialValue: _formData['name'],
-                        title: "Nome",
-                        icon: MaterialCommunityIcons.cow,
-                        placeholder: "Digite o nome do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('name'),
-                      ),
-                      IconTextFormField(
-                        initialValue: _formData['breed'],
-                        title: "Raça",
-                        icon: Icons.pets,
-                        placeholder: "Digite a raça do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('breed'),
-                      ),
-                      IconTextFormField(
-                        initialValue: _formData['dateOfBirth'],
-                        title: "Data de nascimento",
-                        icon: FontAwesome.calendar,
-                        placeholder: "Digite a data de nascimento",
-                        obscureText: false,
-                        onChange: changeDictData('dateOfBirth'),
-                      ),
-                      IconTextFormField(
-                        initialValue: _formData['actualWeight'],
-                        title: "Peso atual",
-                        icon: MaterialCommunityIcons.weight,
-                        placeholder: "Digite o peso atual do bovino",
-                        obscureText: false,
-                        onChange: changeDictData('actualWeight'),
+                      Column(
+                        children:
+                            formInfoList.map((Map<String, dynamic> formInfo) {
+                          return IconTextFormField(
+                            initialValue: _formData[formInfo["onChange"]],
+                            title: formInfo["title"],
+                            icon: formInfo["icon"],
+                            placeholder: formInfo["placeholder"],
+                            obscureText: formInfo["obscureText"],
+                            onChange: changeDictData(formInfo["onChange"]),
+                          );
+                        }).toList(),
                       ),
                       Text(
                         "Tipo de gado",
@@ -323,7 +337,10 @@ class _BovineScreenState extends State<BovineScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              Icon(Icons.edit),
+                              Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                           color: kBrown2,
@@ -367,7 +384,10 @@ class _BovineScreenState extends State<BovineScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      Icon(Icons.delete),
+                      Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                   color: Colors.red,

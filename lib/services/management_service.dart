@@ -4,8 +4,8 @@ import 'package:igado_front/services/api.dart';
 
 class ManagementService {
   final API _api = API();
-  Future<dynamic> createWeighingManagement(Map data) async {
-    var url = _api.url + 'weighing_management';
+  Future<dynamic> performManagement(Map data) async {
+    var url = _api.url + 'management';
     var response = await http.post(
       url,
       headers: <String, String>{

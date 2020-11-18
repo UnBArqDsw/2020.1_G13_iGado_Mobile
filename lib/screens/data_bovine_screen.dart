@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
+import 'package:igado_front/screens/all_managements_screen.dart';
 import 'package:igado_front/screens/weighing_managment_screen.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
@@ -30,7 +31,7 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: kBrown2,
-              automaticallyImplyLeading: false,
+              title: Text('Bovino'),
             ),
             body: Container(
               height: MediaQuery.of(context).size.height,
@@ -113,7 +114,7 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            WeighingManagmentScreen(
+                                            AllManagementsScreen(
                                           bovineId: widget.bovineId,
                                         ),
                                       ),
