@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/screens/all_managements_screen.dart';
+import 'package:igado_front/screens/weighing_managment_screen.dart';
 import 'package:igado_front/services/bovine_service.dart';
 
 class DataBovineScreen extends StatefulWidget {
@@ -27,7 +28,6 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Bovine bovineInfo = snapshot.data;
-          print(bovineInfo);
           return Scaffold(
             appBar: AppBar(
               backgroundColor: kBrown2,
@@ -88,24 +88,47 @@ class _DataBovineScreenState extends State<DataBovineScreen> {
                             height: 115.0,
                           ),
                           Center(
-                            child: FlatButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AllManagementsScreen(
-                                            bovineId: widget.bovineId,
-                                          )),
-                                );
-                              },
-                              child: Text(
-                                'Realizar Manejo',
-                                style: TextStyle(
-                                  color: Colors.white,
+                            child: Column(
+                              children: [
+                                FlatButton(
+                                  minWidth: 150,
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/edit_bovine',
+                                      arguments: bovineInfo,
+                                    );
+                                  },
+                                  child: Text(
+                                    'Editar Bovino',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  color: kBrown2,
                                 ),
-                              ),
-                              color: kBrown2,
+                                FlatButton(
+                                  minWidth: 150,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AllManagementsScreen(
+                                          bovineId: widget.bovineId,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Realizar Manejo',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  color: kBrown2,
+                                ),
+                              ],
                             ),
                           )
                         ],

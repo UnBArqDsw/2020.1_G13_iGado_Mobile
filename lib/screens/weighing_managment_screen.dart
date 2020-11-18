@@ -4,6 +4,7 @@ import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/management_service.dart';
 import 'package:igado_front/utils/alert_utils.dart';
+import 'package:igado_front/services/bovine_service.dart';
 
 class WeighingManagmentScreen extends StatefulWidget {
   int bovineId;
@@ -19,7 +20,7 @@ class _WeighingManagmentScreenState extends State<WeighingManagmentScreen> {
     "actual_weight": "",
     "date_of_actual_weighing": "",
     "bovine_id": "",
-    "type": "weighing_management" 
+    "type": "weighing_management"
   };
   List<Map<String, dynamic>> formInfoList = [
     {

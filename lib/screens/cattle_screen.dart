@@ -63,7 +63,7 @@ class _CattleScreenState extends State<CattleScreen> {
                 ),
                 FlatButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/bovine');
+                    Navigator.pushNamed(context, '/register_bovine');
                   },
                   child: Text(
                     'Adicionar Bovino',
