@@ -7,6 +7,7 @@ import 'package:spreadsheet_decoder/spreadsheet_decoder.dart';
 import 'package:excel/excel.dart';
 import 'package:dio/dio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 
 class ReportService {
   final API _api = API();
@@ -16,8 +17,13 @@ class ReportService {
     var status = await Permission.storage.status;
     if (await Permission.storage.request().isGranted) {
       // We didn't ask for permission yet.
-      String dir = (await getExternalStorageDirectory()).path;
-      var response = await dio.download(url, dir + '/jsiajsa.xlsx');
+      Directory downloadDirectory =
+          await DownloadsPathProvider.downloadsDirectory;
+      String dir = downloadDirectory.path;
+      var response = await dio.download(
+          url,
+          dir +
+              '/relatorio_geral_${DateTime.now().toString().substring(0, 19)}.xlsx');
     }
 
 // You can can also directly ask the permission about its status.

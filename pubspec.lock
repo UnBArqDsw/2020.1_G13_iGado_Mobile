@@ -85,6 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
+  downloads_path_provider:
+    dependency: "direct main"
+    description:
+      name: downloads_path_provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   excel:
     dependency: "direct main"
     description:
@@ -227,7 +234,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.9.2"
   permission_handler:
     dependency: "direct main"
     description:

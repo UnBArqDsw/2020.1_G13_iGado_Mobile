@@ -22,6 +22,7 @@ dependencies:
   flutter_dotenv: ^2.1.0
   flutter_vector_icons: ^0.2.1
   spreadsheet_decoder: ^1.2.0
+  downloads_path_provider: ^0.1.0
 
 dev_dependencies:
   flutter_test:
