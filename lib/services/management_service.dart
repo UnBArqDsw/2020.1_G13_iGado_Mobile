@@ -17,6 +17,6 @@ class ManagementService {
     if (statusCode == 201) {
       return jsonDecode(response.body);
     } else
-      throw Exception('Failed to create bovine. Error $statusCode');
+      throw Exception('Failed to perform management. Error $statusCode');
   }
 }

@@ -11,12 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  path_provider:
+  permission_handler: ^5.0.1+1
+  dio: ^3.0.10
+  excel: ^1.1.5
   cupertino_icons: ^0.1.3
   font_awesome_flutter: ^8.10.0
   http: ^0.12.2
   rflutter_alert: ^1.1.0
   flutter_dotenv: ^2.1.0
   flutter_vector_icons: ^0.2.1
+  spreadsheet_decoder: ^1.2.0
 
 dev_dependencies:
   flutter_test:
