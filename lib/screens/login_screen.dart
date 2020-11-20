@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:igado_front/components/icon_text_form_field.dart';
 import 'package:igado_front/constants.dart';
 import 'package:igado_front/services/login_service.dart';
+import 'package:igado_front/utils/alert_utils.dart';
 
 LoginService loginService = new LoginService();
 
@@ -79,12 +80,18 @@ class _LoginPageState extends State<LoginPage> {
                                 };
                                 response = loginService.login(data);
                                 response
-                                    .then((value) => {
-                                          Navigator.pushNamed(
-                                              context, '/profile')
-                                        })
-                                    .catchError(() => {print('deu ruim')});
-                                print('kk');
+                                    .then((value) =>
+                                        {Navigator.pushNamed(context, '/')})
+                                    .catchError(
+                                  (e) {
+                                    print(e);
+                                    showAlert(
+                                      "Erro ao realizar o login do usuario, verifique seus dados ou tente novamente mais tarde.",
+                                      context,
+                                      null,
+                                    );
+                                  },
+                                );
                               });
                             }
                           : null,
@@ -95,12 +102,15 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       color: kBrown2,
+                      disabledColor: kDisabledButtonColor,
                     ),
                   ],
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
                 child: Text(
                   'Ou cadastre-se aqui',
                   style: TextStyle(

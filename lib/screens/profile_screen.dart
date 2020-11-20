@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Center(
                         child: FlatButton(
                           onPressed: () {
-                            print(userInfo.isProprietary);
+                            Navigator.pushNamed(context, '/login');
                           },
                           child: Text(
                             'Sair da Conta',
