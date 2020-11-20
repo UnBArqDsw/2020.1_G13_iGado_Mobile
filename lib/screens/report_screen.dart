@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:igado_front/components/icon_text_form_field.dart';
-import 'package:igado_front/components/visibility_form_field.dart';
 import 'package:igado_front/constants.dart';
-import 'package:igado_front/services/report_service.dart';
-import 'package:igado_front/utils/alert_utils.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:igado_front/components/simple_card.dart';
 
 class ReportScreen extends StatefulWidget {
   @override
@@ -21,34 +15,32 @@ class _ReportScreenState extends State<ReportScreen> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          MaterialButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            onPressed: () {},
+          FlatButton(
+            minWidth: 150,
+            onPressed: () {
+              Navigator.pushNamed(context, '/create_report');
+            },
             child: Row(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
-                FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/create_report');
-                  },
-                  child: Text(
-                    'Novo Relatório',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                Text(
+                  'Novo Relatório',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
                 ),
               ],
             ),
             color: kBrown2,
           ),
-          SizedBox(height: 0),
+          SizedBox(
+            height: 0,
+            width: MediaQuery.of(context).size.width,
+          ),
         ],
       ),
     );
